@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:paddingTop="@dimen/small_container_padding"
+    android:paddingBottom="@dimen/small_container_padding"
+    android:orientation="vertical">
+
+<FrameLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+    <ImageView
+        android:id="@+id/imageview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:focusable="false"
+        android:scaleType="centerInside"
+        android:src="@mipmap/tab_home_normal"></ImageView>
+
+    <TextView
+        android:id="@+id/main_tab_unread_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="6dp"
+        android:padding="2dp"
+        android:textColor="@android:color/white"
+        android:visibility="invisible"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/imageview"
+        android:layout_toEndOf="@+id/imageview"
+        android:layout_gravity="right|top" />
+</FrameLayout>
+    <TextView
+        android:id="@+id/textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@drawable/common_tab_color"
+        android:textSize="10sp"></TextView>
+
+</LinearLayout>  

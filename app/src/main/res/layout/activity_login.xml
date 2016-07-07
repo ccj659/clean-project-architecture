@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/login_bg"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/iv_cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:padding="@dimen/common_container_padding"
+        android:src="@mipmap/x" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_margin="@dimen/common_container_padding"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/large_top_margin" />
+
+        <EditText
+            android:id="@+id/tv_phone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/common_container_padding"
+            android:background="@mipmap/pic_input_box"
+            android:hint="手机号"
+            android:maxLength="11"
+            android:inputType="phone"
+            android:padding="@dimen/common_container_padding" />
+
+        <EditText
+            android:id="@+id/tv_password"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/common_container_padding"
+            android:background="@mipmap/pic_input_box"
+            android:hint="密码"
+            android:maxLength="20"
+            android:inputType="textPassword"
+            android:padding="@dimen/common_container_padding" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/common_container_padding"
+            android:orientation="horizontal">
+
+
+            <CheckBox
+                android:id="@+id/cb_remember_pass"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="记住密码" />
+
+            <TextView
+                android:id="@+id/tv_forget_pass"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="right"
+                android:visibility="gone"
+                android:text="忘记密码" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linearLayout"
+        android:layout_centerVertical="true"
+        android:id="@+id/linearLayout2">
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_login"
+        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:text="登录"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+
+        android:background="@drawable/bg_btn_login"
+        android:layout_alignTop="@+id/linearLayout2"
+        android:layout_alignLeft="@+id/linearLayout"
+        android:layout_alignStart="@+id/linearLayout" />
+
+    <Button
+        android:id="@+id/btn_register"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_btn_login"
+        android:text="注册"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+
+        android:layout_alignTop="@+id/btn_login"
+        android:layout_alignRight="@+id/linearLayout"
+        android:layout_alignEnd="@+id/linearLayout" />
+
+
+
+</RelativeLayout>

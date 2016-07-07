@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="CircleImageView">
+        <attr name="border_width" format="dimension" />
+        <attr name="border_color" format="color" />
+    </declare-styleable>
+
+    <declare-styleable name="PagerSlidingTabStrip">
+        <attr name="slidingBlock" format="reference|color" />
+        <attr name="allowWidthFull" format="boolean" />
+        <attr name="disableViewPager" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="RefreshLayout">
+        <attr name="footer_view_background" format="color" />
+        <attr name="footer_view_text_color" format="color" />
+        <attr name="is_need_footer" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="CirclePagerIndicator">
+        <attr name="circle_indicator_centerHorizontal" format="boolean" />
+        <attr name="circle_indicator_follow" format="boolean" />
+        <attr name="circle_indicator_orientation" format="reference" />
+        <attr name="circle_indicator_color" format="color" />
+        <attr name="circle_indicator_stroke_color" format="color" />
+        <attr name="circle_indicator_stroke_width" format="dimension" />
+        <attr name="circle_indicator_fill_color" format="color" />
+        <attr name="circle_indicator_radius" format="dimension" />
+        <attr name="circle_indicator_space" format="dimension" />
+        <attr name="circle_indicator_indicator_radius" format="dimension" />
+    </declare-styleable>
+    <declare-styleable name="LinePagerIndicator">
+        <attr name="line_indicator_centerHorizontal" format="boolean" />
+        <attr name="line_indicator_width" format="dimension" />
+        <attr name="line_indicator_height" format="dimension" />
+        <attr name="line_indicator_indicator_height" format="dimension" />
+        <attr name="line_indicator_space" format="dimension" />
+        <attr name="line_indicator_fill_color" format="color" />
+        <attr name="line_indicator_indicator_color" format="color" />
+        <attr name="line_indicator_follow" format="boolean" />
+    </declare-styleable>
+</resources>

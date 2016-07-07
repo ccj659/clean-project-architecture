@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="tab_lable_arrays">
+        <item>主页</item>
+        <item>应用</item>
+        <item>通讯录</item>
+        <item>个人中心</item>
+
+    </string-array>
+
+
+</resources>
