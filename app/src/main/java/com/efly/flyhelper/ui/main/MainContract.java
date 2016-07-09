@@ -9,8 +9,8 @@ import com.efly.flyhelper.base.BaseView;
 public interface MainContract  {
 
     interface View extends BaseView {
-
-
+        void initToolBar();
+        void initTabHost();
     }
 
     interface Presenter extends BasePresenter {

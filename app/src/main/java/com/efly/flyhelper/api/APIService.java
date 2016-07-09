@@ -1,9 +1,6 @@
 package com.efly.flyhelper.api;
 
-import android.util.Log;
-
 import com.efly.flyhelper.bean.User;
-import com.efly.flyhelper.bean.WeatherData;
 import com.efly.flyhelper.utils.TLog;
 
 import java.util.HashMap;
@@ -14,7 +11,8 @@ import retrofit.RxJavaCallAdapterFactory;
 import rx.Observable;
 
 /**
- * Created by Administrator on 2016/3/1.
+ * 调用后台的接口,架构网络层采用Retroft+Rxjava+gson
+ * Created by ccj on 2016/7/1.
  *
  */
 public class APIService {
@@ -25,6 +23,7 @@ public class APIService {
 
     /**
      * 基础地址
+     * 初始化 retroft
      */
     private static final Retrofit sRetrofit = new Retrofit.Builder()
             .baseUrl(URL_HOST)
@@ -38,7 +37,7 @@ public class APIService {
 
 
     /**
-     * 获取登录数据
+     * 登录,返回,我这边用的是json格式的post,大家可以进行选择
      * @param city
      * @return
      */
@@ -47,21 +46,11 @@ public class APIService {
         hashMap.put("UserPhone", format);
         hashMap.put("UserPassWord", city);
         TLog.log(hashMap.toString());
-        Log.e(TAG,hashMap.toString());
         Observable<User> ss = apiManager.userLogin(hashMap);
         return  ss;
     }
 
-    /**
-     * 获取天气数据
-     * @param city
-     * @return
-     */
-
-    public static Observable<WeatherData> getWeatherData(String format, String city) {
-        Observable<WeatherData> ss = apiManager.getWeatherData(format, city, "ad1d20bebafe0668502c8eea5ddd0333");
-        return  ss;
-    }
+    /**********************仿照上面的方法,进行请求数据****************************/
 
 
 

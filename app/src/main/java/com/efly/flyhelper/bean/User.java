@@ -7,7 +7,7 @@ import java.io.Serializable;
 /**
  * Created by yunjian on 2015/12/2.
  */
-public class User implements Serializable {
+public class User extends BaseBean implements Serializable {
 
     public static final long serialVersionUID = 2233933716943685981L;
     /**

@@ -11,7 +11,8 @@ import com.efly.flyhelper.AppManager;
 import com.efly.flyhelper.R;
 
 /**
- * Created by Administrator on 2016/7/5.
+ * base 来进行 toolbar dialog 初始化,activity栈的添加,删除等
+ * Created by ccj on 2016/7/5.
  */
 public class BaseActivity extends AppCompatActivity implements BaseView {
 
@@ -24,7 +25,7 @@ public class BaseActivity extends AppCompatActivity implements BaseView {
         super.onCreate(savedInstanceState);
         AppManager.getAppManager().addActivity(this);
         mContext=this;
-        initView();
+        initDialog();
     }
 
     public void initToolBar() {
@@ -44,17 +45,10 @@ public class BaseActivity extends AppCompatActivity implements BaseView {
         return toolbar;
     }
 
-
     @Override
     protected void onDestroy() {
         super.onDestroy();
         AppManager.getAppManager().finishActivity(this);
-    }
-
-
-    public void initView() {
-        //initToolBar();
-        initDialog();
     }
 
     private void initDialog() {

@@ -7,8 +7,6 @@ import java.util.Stack;
 /**
  * activity堆栈式管理
  *
- * @author FireAnt（http://my.oschina.net/LittleDY）
- * @created 2014年10月30日 下午6:22:05
  */
 public class AppManager {
 

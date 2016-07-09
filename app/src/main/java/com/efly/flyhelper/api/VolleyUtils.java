@@ -8,9 +8,11 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.Volley;
 import com.efly.flyhelper.base.BaseApplication;
+import com.efly.flyhelper.utils.LruBitmapCache;
 
 
 /**
+ * volley留做备用
  * Created by ccj on 2015/12/4.
  */
 public class VolleyUtils {

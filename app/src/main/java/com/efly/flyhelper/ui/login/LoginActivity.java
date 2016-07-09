@@ -49,7 +49,7 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
         presenter=new LoginPresenter(this);
-
+        presenter.start();
     }
 
 
@@ -58,7 +58,6 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
         Intent intent =new Intent(getBaseContext(),MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
-
     }
 
     @Override
@@ -100,5 +99,14 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
     public void showError(String error) {
         BaseApplication.showShortToast(error);
 
+    }
+
+    /**
+     * 销毁 解绑
+     */
+    @Override
+    protected void onDestroy() {
+        presenter.onDestroy();
+        super.onDestroy();
     }
 }

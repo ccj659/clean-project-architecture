@@ -1,4 +1,4 @@
-package com.efly.flyhelper.api;
+package com.efly.flyhelper.utils;
 
 import android.graphics.Bitmap;
 import android.support.v4.util.LruCache;

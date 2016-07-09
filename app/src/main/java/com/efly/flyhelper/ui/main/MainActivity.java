@@ -3,7 +3,6 @@ package com.efly.flyhelper.ui.main;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTabHost;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -13,6 +12,7 @@ import android.widget.TabHost;
 import android.widget.TextView;
 
 import com.efly.flyhelper.R;
+import com.efly.flyhelper.base.BaseActivity;
 import com.efly.flyhelper.fragment.ContactsFragment;
 import com.efly.flyhelper.fragment.MessageFragment;
 import com.efly.flyhelper.fragment.PersonFragment;
@@ -21,7 +21,7 @@ import com.efly.flyhelper.fragment.UseFragment;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity implements MainContract.View {
+public class MainActivity extends BaseActivity implements MainContract.View {
 
     private static final String TAG = MainActivity.class.getSimpleName();
     @Bind(R.id.toolbar)
@@ -50,11 +50,10 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        initView();
         mainPresenter = new MainPresenter(this);
+        mainPresenter.start();
     }
-
-
+    @Override
     public void initToolBar() {
         toolbar.setBackgroundColor(getResources().getColor(R.color.blue));
         //toolbar.setNavigationIcon(R.mipmap.back);
@@ -68,7 +67,8 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
         });
     }
 
-    private void initTabHost() {
+    @Override
+    public void initTabHost() {
         mTabHost.setup(this, getSupportFragmentManager(), R.id.realtabcontent);
         mTabHost.getTabWidget().setDividerDrawable(null);
         int count = fragmentArray.length;
@@ -94,6 +94,7 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
         mTabHost.setOnTabChangedListener(tabChangeListener);
     }
 
+
     /**
      * 给Tab按钮设置图标和文字
      */
@@ -107,16 +108,4 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
         return view;
     }
 
-    public void initView() {
-        initToolBar();
-        initTabHost();
-    }
-
-    public void showLoading() {
-
-    }
-
-    public void dismissLoading() {
-
-    }
 }

@@ -42,6 +42,5 @@ dependencies {
     compile 'de.hdodenhof:circleimageview:2.0.0'
     compile 'com.google.code.gson:gson:2.4'
     compile 'com.mcxiaoke.volley:library:1.0.19'
-
     compile 'org.xutils:xutils:3.3.34'
 }

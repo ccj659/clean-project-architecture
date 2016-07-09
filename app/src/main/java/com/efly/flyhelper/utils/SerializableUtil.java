@@ -10,7 +10,7 @@ import java.io.ObjectOutputStream;
 import java.util.List;
 
 /**
- * Created by yunjian on 2015/12/7.
+ * Created by ccj on 2015/12/7.
  */
 public class SerializableUtil {
 

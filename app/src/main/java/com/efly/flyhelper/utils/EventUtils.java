@@ -41,9 +41,13 @@ public class EventUtils {
 
     }
 
-    public static class getPicURLEvent{
+    /**
+     * 传递String类型的event
+     *
+     */
+    public static class getStringEvent {
         private String url;
-        public getPicURLEvent(String url) {
+        public getStringEvent(String url) {
             // TODO Auto-generated constructor stub
             this.url = url;
         }
@@ -52,5 +56,20 @@ public class EventUtils {
         }
     }
 
+    /**
+     * object类型(即传统的所有类型,都可以强转进行传递事件)
+     *
+     */
+
+    public static class ObjectEvent{
+        private Object object;
+        public ObjectEvent(Object object) {
+            // TODO Auto-generated constructor stub
+            this.object = object;
+        }
+        public Object getMsg(){
+            return object;
+        }
+    }
 
 }

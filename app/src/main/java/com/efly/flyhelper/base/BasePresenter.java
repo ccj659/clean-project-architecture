@@ -5,7 +5,7 @@ package com.efly.flyhelper.base;
  */
 public interface BasePresenter  {
 
-
+    void start();
 
 
 }

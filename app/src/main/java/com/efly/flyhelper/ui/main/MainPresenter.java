@@ -1,7 +1,5 @@
 package com.efly.flyhelper.ui.main;
 
-import com.efly.flyhelper.ui.main.MainContract;
-
 /**
  * Created by Administrator on 2016/7/7.
  */
@@ -11,14 +9,12 @@ public class MainPresenter implements MainContract.Presenter {
 
     public MainPresenter(MainContract.View mainView) {
         this.mainView=mainView;
-
     }
 
 
-
-
-    public void setTabHost() {
+    @Override
+    public void start() {
+        mainView.initToolBar();
+        mainView.initTabHost();
     }
-
-
 }

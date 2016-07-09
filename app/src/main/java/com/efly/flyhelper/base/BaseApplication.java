@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.efly.flyhelper.R;
 
 /**
+ * 获取上下文,Toast,以及各种初始化
  * Created by Administrator on 2016/7/5.
  */
 public class BaseApplication extends Application {

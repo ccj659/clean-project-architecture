@@ -3,7 +3,7 @@ package com.efly.flyhelper.utils;
 import android.util.Log;
 
 public class TLog {
-	public static final String LOG_TAG = "TLog";
+	public static final String LOG_TAG = "TLog-->";
 	public static boolean DEBUG = true;//是否处在debug
 
 	public TLog() {

@@ -3,7 +3,7 @@ package com.efly.flyhelper.bean;
 import java.util.List;
 
 /**
- * Created by Administrator on 2015/12/21.
+ * Created by ccj on 2015/12/21.
  */
 public class WeatherData {
 
