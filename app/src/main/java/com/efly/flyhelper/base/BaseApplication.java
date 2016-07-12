@@ -11,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.efly.flyhelper.R;
+import com.efly.flyhelper.utils.SharedPreferenceUtil;
 
 /**
  * 获取上下文,Toast,以及各种初始化
@@ -34,7 +35,7 @@ public class BaseApplication extends Application {
         super.onCreate();
         context = getBaseContext();
         baseApplication = this;
-
+        SharedPreferenceUtil.initSharedPreference(getApplicationContext());
     }
 
 
@@ -79,6 +80,8 @@ public class BaseApplication extends Application {
     }
 
 
+
+
     public static Context getContext() {
         return context;
     }
@@ -94,6 +97,7 @@ public class BaseApplication extends Application {
     public static void setResource(Resources resource) {
         BaseApplication.resource = resource;
     }
+
 
     public static void showShortToast(String message) {
         showToast(message, Toast.LENGTH_SHORT, 0, Gravity.BOTTOM);

@@ -241,7 +241,7 @@ public class BitmapUtil {
 
 
     /*
-    * 质量压缩：
+    * 质量压缩保存：
     * */
 
     public int savePic(Context context, final File file, final Bitmap bitmap) {

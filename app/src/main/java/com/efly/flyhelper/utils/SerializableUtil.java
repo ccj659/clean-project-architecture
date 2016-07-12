@@ -11,6 +11,8 @@ import java.util.List;
 
 /**
  * Created by ccj on 2015/12/7.
+ * 将 对象转为 字符串,易于保存 上传等
+ *
  */
 public class SerializableUtil {
 

@@ -6,6 +6,7 @@ import android.support.v4.util.LruCache;
 import com.android.volley.toolbox.ImageLoader;
 
 /**
+ * 图片缓存池
  * Created by ccj on 2016/1/6.
  */
 public class LruBitmapCache implements ImageLoader.ImageCache {

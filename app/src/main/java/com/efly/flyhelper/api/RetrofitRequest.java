@@ -13,6 +13,7 @@ import retrofit.http.Query;
 import rx.Observable;
 
 /**
+ *
  * Created by ccj on 2016/7/6.
  */
 public interface RetrofitRequest {
@@ -27,7 +28,7 @@ public interface RetrofitRequest {
 
 
     /**
-     * 登录返回
+     * 登录返回(json post)
      * @param body
      * @return
      */
@@ -35,9 +36,8 @@ public interface RetrofitRequest {
     @POST(BASE_URL+"Login.ashx/")
     Observable<User> userLogin(@Body HashMap<String, String> body);
 
-
     /**
-     * 获取天气数据
+     * 获取天气数据(测试)
      * @param cityname
      * @param key
      * @return

@@ -16,6 +16,8 @@ import com.efly.flyhelper.R;
 
 /**
  * dialog 类库
+ * 这里的context 要用activity的上下文,
+ *
  */
 
 public class DialogCreator {

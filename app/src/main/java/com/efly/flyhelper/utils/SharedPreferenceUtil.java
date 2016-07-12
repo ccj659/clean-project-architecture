@@ -25,8 +25,15 @@ public class SharedPreferenceUtil {
     private SharedPreferences sp;
 
 
-    // 初始化，一般在应用启动之后就要初始化
+    //
 
+    /**
+     *
+     * 初始化，一般在应用启动之后就要初始化
+     *
+     * @param context 此处的context要用application的全局上下文,
+     *                避免static强类型一直持有activity的引用,造成内存泄露
+     */
     public static synchronized void initSharedPreference(Context context) {
         if (spUtils == null) {
             spUtils = new SharedPreferenceUtil(context);
