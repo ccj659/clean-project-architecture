@@ -21,11 +21,10 @@ mvp+rxjava+retrofit+eventBus
 
  - MVP是模型（Model）、视图（View）、主持人（Presenter）的缩写，分别代表项目中3个不同的模块。**我以登录为例子,进行说明.**
 
-![baidu](http://www.baidu.com/img/bdlogo.gif)
+![这里写图片描述](http://img.blog.csdn.net/20160712153716629)
  
   这里每个业务首先要有一个管理接口Contract,在这里面有三个接口来面向接口编程, （Model）,（View）,（Presenter）. 将三个接口放在一起便于管理.
-  
-![baidu](http://www.baidu.com/img/bdlogo.gif)
+![这里写图片描述](http://img.blog.csdn.net/20160712153741743)
 ```java
    /**
  * 登录关联接口类
@@ -262,7 +261,7 @@ public class EventUtils {
 ```
 
 ***5.代码分包: 根据业务区分进行分包,便于对代码进行管理 .***
- ![baidu](http://www.baidu.com/img/bdlogo.gif)
+![这里写图片描述](http://img.blog.csdn.net/20160712153822145) 
 
 
 ***6. 工具类: TDeviceUtils设备状态的工具类,,SeriliazebleUtils 序列化工具类,SharepreferenceUtils保存工具类,***
@@ -287,4 +286,5 @@ public class EventUtils {
 3.易于做测试，只要基于每个模块单独做好单元测试就能确保整体的稳定性。
 4.易于快速迭代，基于代码的低耦合，只需在业务逻辑上增加接口，然后在相应的层级分别实现即可，丝毫不影响其他功能。
 
-
+##Blog-link
+[csdn博客,欢迎大家指正,评阅~谢谢O(∩_∩)O谢谢](http://blog.csdn.net/ccj659/article/details/51889713)  
