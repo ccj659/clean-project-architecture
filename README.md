@@ -19,9 +19,11 @@ android架构篇mvp+rxjava+retrofit+eventBus
 
  - MVP是模型（Model）、视图（View）、主持人（Presenter）的缩写，分别代表项目中3个不同的模块。**我以登录为例子,进行说明.**
 
- ![baidu](http://www.baidu.com/img/bdlogo.gif)
+![baidu](http://www.baidu.com/img/bdlogo.gif)
+ 
   这里每个业务首先要有一个管理接口Contract,在这里面有三个接口来面向接口编程, （Model）,（View）,（Presenter）. 将三个接口放在一起便于管理.
-  ![baidu](http://www.baidu.com/img/bdlogo.gif)
+  
+![baidu](http://www.baidu.com/img/bdlogo.gif)
 ```java
    /**
  * 登录关联接口类
