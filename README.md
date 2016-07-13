@@ -24,6 +24,7 @@ mvp+rxjava+retrofit+eventBus
 ![这里写图片描述](http://img.blog.csdn.net/20160712153716629)
  
   这里每个业务首先要有一个管理接口Contract,在这里面有三个接口来面向接口编程, （Model）,（View）,（Presenter）. 将三个接口放在一起便于管理.
+  
 ![这里写图片描述](http://img.blog.csdn.net/20160712153741743)
 ```java
    /**
@@ -261,6 +262,7 @@ public class EventUtils {
 ```
 
 ***5.代码分包: 根据业务区分进行分包,便于对代码进行管理 .***
+
 ![这里写图片描述](http://img.blog.csdn.net/20160712153822145) 
 
 
