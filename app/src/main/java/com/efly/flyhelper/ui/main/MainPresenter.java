@@ -17,4 +17,11 @@ public class MainPresenter implements MainContract.Presenter {
         mainView.initToolBar();
         mainView.initTabHost();
     }
+
+    @Override
+    public void onDestroy() {
+        if (mainView!=null){
+            mainView=null;
+        }
+    }
 }

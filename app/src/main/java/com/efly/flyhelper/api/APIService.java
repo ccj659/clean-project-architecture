@@ -18,9 +18,7 @@ import rx.Observable;
 public class APIService {
 
     private static final String TAG = "APIService";
-    public static final String URL_HOST ="http://123.234.82.23" ;//服务器
-
-
+    public static final String URL_HOST ="http://123.234.82.23" ;//服务器端口
     /**
      * 基础地址
      * 初始化 retroft
@@ -31,9 +29,6 @@ public class APIService {
             .addCallAdapterFactory(RxJavaCallAdapterFactory.create()) // 使用RxJava作为回调适配器
             .build();
     private static final RetrofitRequest apiManager = sRetrofit.create(RetrofitRequest.class);
-
-
-
     /**
      * 登录,返回,我这边用的是json格式的post,大家可以进行选择
      * @param city

@@ -14,13 +14,9 @@ public interface LoginContract {
 
     interface View extends BaseView {
         void showProgress();
-
         void hideProgress();
-
         void showError(String error);
-
         void navigateToMain();
-
         void navigateToRegister();
     }
 

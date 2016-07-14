@@ -9,7 +9,6 @@ import com.efly.flyhelper.bean.User;
  *  相当于 model层.
  *  如果处理的出具多,就采用此model ,就像图片保存显示等等.
  *
- *
  */
 
 

@@ -14,18 +14,21 @@ import com.efly.flyhelper.R;
  * base 来进行 toolbar dialog 初始化,activity栈的添加,删除等
  * Created by ccj on 2016/7/5.
  */
-public class BaseActivity extends AppCompatActivity implements BaseView {
+public  class BaseActivity<T extends BasePresenter>
+        extends AppCompatActivity implements BaseView {
 
+    public T mPresenter;
     protected ProgressDialog progressDialog;
-    protected  Toolbar toolbar;
-    protected BasePresenter mPresenter;
+    protected Toolbar toolbar;
     protected Context mContext;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         AppManager.getAppManager().addActivity(this);
-        mContext=this;
+        mContext = this;
         initDialog();
+
     }
 
     public void initToolBar() {
@@ -45,21 +48,29 @@ public class BaseActivity extends AppCompatActivity implements BaseView {
         return toolbar;
     }
 
+    /**
+     * 资源释放
+     */
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        if (mPresenter != null)
+            mPresenter.onDestroy();
         AppManager.getAppManager().finishActivity(this);
     }
 
     private void initDialog() {
-        progressDialog=new ProgressDialog(this);
+        progressDialog = new ProgressDialog(this);
         progressDialog.setMessage(getResources().getString(R.string.show_loading_msg));
     }
 
     public void showLoading() {
         progressDialog.show();
     }
+
     public void dismissLoading() {
         progressDialog.dismiss();
     }
+
+
 }

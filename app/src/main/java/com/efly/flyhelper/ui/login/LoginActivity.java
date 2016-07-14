@@ -22,7 +22,7 @@ import butterknife.OnClick;
 /**
  * Created by Administrator on 2016/7/7.
  */
-public class LoginActivity extends BaseActivity implements LoginContract.View {
+public class LoginActivity extends BaseActivity<LoginContract.Presenter> implements LoginContract.View {
 
     @Bind(R.id.iv_cancel)
     ImageView ivCancel;
@@ -52,6 +52,9 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
         presenter.start();
     }
 
+    public void setPresenter(LoginPresenter presenter) {
+        this.presenter = presenter;
+    }
 
     @Override
     public void navigateToMain() {
@@ -109,4 +112,5 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
         presenter.onDestroy();
         super.onDestroy();
     }
+
 }

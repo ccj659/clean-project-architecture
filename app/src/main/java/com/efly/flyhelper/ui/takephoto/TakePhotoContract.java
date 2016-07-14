@@ -3,6 +3,7 @@ package com.efly.flyhelper.ui.takephoto;
 import android.content.Intent;
 import android.graphics.Bitmap;
 
+import com.efly.flyhelper.base.BaseModel;
 import com.efly.flyhelper.base.BasePresenter;
 import com.efly.flyhelper.base.BaseView;
 
@@ -24,7 +25,9 @@ public interface TakePhotoContract {
         void savePhoto(Intent data);
     }
 
-    interface Model {
+    interface Model extends BaseModel{
         void savePhoto(Intent data);
     }
+
+
 }

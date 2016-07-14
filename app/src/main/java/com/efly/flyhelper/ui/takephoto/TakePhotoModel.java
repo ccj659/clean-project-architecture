@@ -25,7 +25,7 @@ import rx.schedulers.Schedulers;
  * Created by Administrator on 2016/7/8.
  */
 public class TakePhotoModel implements TakePhotoContract.Model {
-    Bitmap bitmap = null;
+    private Bitmap bitmap = null;
 
     private Observable<String> saveObservable;
     private Subscription saveSubscription;
@@ -96,4 +96,15 @@ public class TakePhotoModel implements TakePhotoContract.Model {
     }
 
 
+    @Override
+    public void start() {
+
+
+    }
+
+    @Override
+    public void onDestroy() {
+
+
+    }
 }

@@ -48,6 +48,16 @@ public class TakePhotoPresenter implements TakePhotoContract.Presenter {
         view.initView();
     }
 
+    @Override
+    public void onDestroy() {
+        if (view!=null){
+            view=null;
+        }
+        EventBus.getDefault().unregister(this);
+
+
+    }
+
 
 /***********************************下方的订阅也可以放在activity中订阅,注意首先注册订阅****************************************/
 

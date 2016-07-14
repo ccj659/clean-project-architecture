@@ -21,7 +21,7 @@ import com.efly.flyhelper.fragment.UseFragment;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class MainActivity extends BaseActivity implements MainContract.View {
+public class MainActivity extends BaseActivity<MainContract.Presenter> implements MainContract.View {
 
     private static final String TAG = MainActivity.class.getSimpleName();
     @Bind(R.id.toolbar)
@@ -94,7 +94,6 @@ public class MainActivity extends BaseActivity implements MainContract.View {
         mTabHost.setOnTabChangedListener(tabChangeListener);
     }
 
-
     /**
      * 给Tab按钮设置图标和文字
      */
@@ -107,5 +106,8 @@ public class MainActivity extends BaseActivity implements MainContract.View {
         textView.setText(tabHostTagArray[index]);
         return view;
     }
+
+
+
 
 }
