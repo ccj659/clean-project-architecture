@@ -20,14 +20,13 @@ import butterknife.OnClick;
 /**
  * Created by Administrator on 2016/7/8.
  */
-public class TakePhotoActivity extends BaseActivity implements TakePhotoContract.View {
+public class TakePhotoActivity extends BaseActivity<TakePhotoContract.Presenter> implements TakePhotoContract.View {
     @Bind(R.id.imageView)
     ImageView imageView;
     @Bind(R.id.button)
     Button button;
     public static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
     private static final int MEDIA_TYPE_IMAGE = 1;
-    private TakePhotoPresenter takePhotoPresenter;
 
 
     @Override
@@ -35,8 +34,8 @@ public class TakePhotoActivity extends BaseActivity implements TakePhotoContract
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_take_photo);
         ButterKnife.bind(this);
-        takePhotoPresenter = new TakePhotoPresenter(this);
-        takePhotoPresenter.start();
+        mPresenter = new TakePhotoPresenter(this);
+        mPresenter.start();
     }
 
     @Override
@@ -79,7 +78,7 @@ public class TakePhotoActivity extends BaseActivity implements TakePhotoContract
             if (resultCode == RESULT_OK) {
                 TLog.log(data.getData().toString());
                 Log.e("Tlog","data-->"+data.getData().toString());
-                takePhotoPresenter.savePhoto(data);
+                mPresenter.savePhoto(data);
             }
 
         }

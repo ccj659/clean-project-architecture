@@ -42,18 +42,17 @@ public class LoginActivity extends BaseActivity<LoginContract.Presenter> impleme
     Button btnLogin;
     @Bind(R.id.btn_register)
     Button btnRegister;
-    private LoginPresenter presenter;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
-        presenter=new LoginPresenter(this);
-        presenter.start();
+        mPresenter=new LoginPresenter(this);
+        mPresenter.start();
     }
 
     public void setPresenter(LoginPresenter presenter) {
-        this.presenter = presenter;
+        this.mPresenter = presenter;
     }
 
     @Override
@@ -76,7 +75,7 @@ public class LoginActivity extends BaseActivity<LoginContract.Presenter> impleme
                 finish();
                 break;
             case R.id.btn_login:
-                presenter.login(tvPhone.getText().toString(),tvPassword.getText().toString());
+                mPresenter.login(tvPhone.getText().toString(),tvPassword.getText().toString());
 
                 break;
             case R.id.btn_register:
@@ -102,15 +101,6 @@ public class LoginActivity extends BaseActivity<LoginContract.Presenter> impleme
     public void showError(String error) {
         BaseApplication.showShortToast(error);
 
-    }
-
-    /**
-     * 销毁 解绑
-     */
-    @Override
-    protected void onDestroy() {
-        presenter.onDestroy();
-        super.onDestroy();
     }
 
 }

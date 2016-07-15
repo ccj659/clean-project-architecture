@@ -40,7 +40,6 @@ public class MainActivity extends BaseActivity<MainContract.Presenter> implement
     private String tabHostTagArray[] = {"消息", "通讯录", "应用", "个人中心"};
     private int mImageViewArray[] = {R.drawable.ic_recent, R.drawable.ic_contacts,R.drawable.ic_keypad , R.drawable.ic_person};
 
-    private MainPresenter mainPresenter;
     private TabHost.OnTabChangeListener tabChangeListener;
     private String currentTab=tabHostTagArray[0];
     private TextView toolbar_title;
@@ -50,8 +49,8 @@ public class MainActivity extends BaseActivity<MainContract.Presenter> implement
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        mainPresenter = new MainPresenter(this);
-        mainPresenter.start();
+        mPresenter = new MainPresenter(this);
+        mPresenter.start();
     }
     @Override
     public void initToolBar() {

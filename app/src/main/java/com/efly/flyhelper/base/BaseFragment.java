@@ -12,11 +12,11 @@ import android.view.LayoutInflater;
 /**
  * Created by Administrator on 2016/7/5.
  */
-public class BaseFragment extends Fragment implements BaseView{
+public class BaseFragment<T extends BasePresenter> extends Fragment implements BaseView{
 
     private LayoutInflater mInflater;
     private Dialog dialog;
-
+    public T mPresenter;
     protected float mDensity;
     protected int mDensityDpi;
     protected int mWidth;
@@ -28,7 +28,6 @@ public class BaseFragment extends Fragment implements BaseView{
         super.onCreate(savedInstanceState);
         getScreen();
     }
-
 
 
     public void initView() {
@@ -56,5 +55,17 @@ public class BaseFragment extends Fragment implements BaseView{
         mDensityDpi = dm.densityDpi;
         mWidth = dm.widthPixels;
         mAvatarSize = (int) (50 * mDensity);
+    }
+
+    /**
+     * 解绑的时候 清除
+     */
+    @Override
+    public void onDetach() {
+        if (mPresenter!=null){
+            mPresenter.onDestroy();
+        }
+
+        super.onDetach();
     }
 }
