@@ -1,5 +1,8 @@
 apply plugin: 'com.android.application'
-
+apply plugin: 'com.dodola.rocoofix'
+repositories {
+    jcenter()
+}
 android {
     compileSdkVersion 23
     buildToolsVersion "23.0.3"
@@ -8,21 +11,49 @@ android {
         applicationId "com.efly.flyhelper"
         minSdkVersion 15
         targetSdkVersion 23
-        versionCode 1
+        versionCode 3
+        multiDexEnabled true
         versionName "1.0"
     }
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+
+        debug {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+
+    }
+
+}
+/*
+repositories {
+    maven {
+        url "http://dl.bintray.com/dodola/maven"
     }
 }
+*/
+rocoo_fix {
+    //includePackage = ['com.efly.flyhelper']
+    excludeClass = ['BaseApplication.class','HotFixManger.class','BaseActivity.class']
+    preVersionPath = '2'
+    enable = true
+    scanref=true
+
+}
+
+
+
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
-    
+
+    compile 'com.dodola:rocoo:1.1'
+
     compile 'com.android.support:appcompat-v7:23.4.0'
     compile 'com.android.support:recyclerview-v7:23.0.0'
     compile 'com.android.support:cardview-v7:23.0.0'
@@ -35,12 +66,8 @@ dependencies {
     compile 'com.squareup.retrofit:adapter-rxjava:2.0.0-beta2'
 
 
-
-
     compile 'com.jakewharton:butterknife:7.0.1'
     compile 'de.greenrobot:eventbus:2.4.0'
-    compile 'de.hdodenhof:circleimageview:2.0.0'
     compile 'com.google.code.gson:gson:2.4'
     compile 'com.mcxiaoke.volley:library:1.0.19'
-    compile 'org.xutils:xutils:3.3.34'
 }

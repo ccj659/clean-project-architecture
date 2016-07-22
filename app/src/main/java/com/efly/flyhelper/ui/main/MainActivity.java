@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.TabHost;
 import android.widget.TextView;
 
+import com.efly.flyhelper.AppManager;
 import com.efly.flyhelper.R;
 import com.efly.flyhelper.base.BaseActivity;
 import com.efly.flyhelper.fragment.ContactsFragment;
@@ -108,5 +109,10 @@ public class MainActivity extends BaseActivity<MainContract.Presenter> implement
 
 
 
+    @Override
+    public void onBackPressed() {
+        // LxApplication.exit();
+        AppManager.getAppManager().AppExit();
+    }
 
 }

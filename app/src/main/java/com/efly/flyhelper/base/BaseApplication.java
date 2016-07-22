@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.efly.flyhelper.HotFixManger;
 import com.efly.flyhelper.R;
 import com.efly.flyhelper.utils.SharedPreferenceUtil;
 
@@ -24,11 +25,26 @@ public class BaseApplication extends Application {
     private static Context context;
     private static Resources resource;
     private static BaseApplication baseApplication;
+    private String dexPath;
+
     public static synchronized BaseApplication getInstance() {
         return baseApplication;
     }
 
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
 
+        //nvwa有坑,在此就不再适用~
+       /* Nuwa.init(this);
+        Nuwa.loadPatch(this, Environment.getExternalStorageDirectory().getAbsolutePath().concat("/patch.jar"));*/
+
+        //打补丁
+        HotFixManger.init(this);
+
+
+
+    }
 
     @Override
     public void onCreate() {
@@ -37,6 +53,38 @@ public class BaseApplication extends Application {
         baseApplication = this;
         SharedPreferenceUtil.initSharedPreference(getApplicationContext());
     }
+
+
+   /* *//**
+     * 请求网络,看返回参数,如果服务器有补丁包patch.jar就下载,如果没有 就不下载
+     * @return
+     *//*
+    public boolean checkBugs(){
+
+        if (noNeedRepaire){
+            Log.e(TAG, "noNeedRepaire-->" );
+            deletePatch() ;
+        }else {
+            Log.e(TAG, "RocooFix.loadPatch-->" );
+            RocooFix.applyPatch(this, dexPath);
+
+        }
+        return true;
+    }
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

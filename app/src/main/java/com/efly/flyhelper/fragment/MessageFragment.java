@@ -7,9 +7,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.efly.flyhelper.R;
 import com.efly.flyhelper.base.BaseFragment;
+import com.efly.flyhelper.ui.hotfix.HelloHack;
 import com.efly.flyhelper.ui.login.LoginActivity;
 import com.efly.flyhelper.ui.takephoto.TakePhotoActivity;
 
@@ -26,6 +29,10 @@ public class MessageFragment extends BaseFragment {
     Button button2;
     @Bind(R.id.button3)
     Button button3;
+    @Bind(R.id.textview)
+    TextView textview;
+    @Bind(R.id.button5)
+    Button button5;
     private View view;
     private static final String TAG = MessageFragment.class.getSimpleName();
 
@@ -53,7 +60,7 @@ public class MessageFragment extends BaseFragment {
         ButterKnife.unbind(this);
     }
 
-    @OnClick({R.id.button2, R.id.button3})
+    @OnClick({R.id.button2, R.id.button3,R.id.button5})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.button2:
@@ -62,16 +69,27 @@ public class MessageFragment extends BaseFragment {
             case R.id.button3:
                 navigateTakePhoto();
                 break;
+            case R.id.button5:
+                hotFix();
+                break;
         }
     }
 
+    private void hotFix() {
+        HelloHack hack = new HelloHack();
+        Toast.makeText(getActivity(), hack.showHello(), Toast.LENGTH_SHORT).show();
+
+    }
+
     private void navigateToLogin() {
-        Intent intent =new Intent(getActivity(),LoginActivity.class);
+        Intent intent = new Intent(getActivity(), LoginActivity.class);
         startActivity(intent);
     }
 
     private void navigateTakePhoto() {
-        Intent intent =new Intent(getActivity(),TakePhotoActivity.class);
+        Intent intent = new Intent(getActivity(), TakePhotoActivity.class);
         startActivity(intent);
     }
+
+
 }
