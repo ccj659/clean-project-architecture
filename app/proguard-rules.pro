@@ -1,46 +1,5 @@
 
-#-dontwarn
-#-optimizationpasses 5
-#-dontusemixedcaseclassnames
-#-dontskipnonpubliclibraryclasses
-#-dontpreverify
-#-verbose
-#-optimizations !code/simplification/arithmetic,!field/*,!class/merging/*
-#
-#-keep public class * extends android.app.Activity
-#-keep public class * extends android.app.Application
-#-keep public class * extends android.app.Service
-#-keep public class * extends android.content.BroadcastReceiver
-#-keep public class * extends android.content.ContentProvider
-#-keep public class * extends android.app.backup.BackupAgentHelper
-#-keep public class * extends android.preference.Preference
-#-keep public class com.android.vending.licensing.ILicensingService
-#
-#-keepclasseswithmembernames class * {
-#    native <methods>;
-#}
-#
-#-keepclasseswithmembers class * {
-#    public <init>(android.content.Context, android.util.AttributeSet);
-#}
-#
-#-keepclasseswithmembers class * {
-#    public <init>(android.content.Context, android.util.AttributeSet, int);
-#}
-#
-#-keepclassmembers class * extends android.app.Activity {
-#   public void *(android.view.View);
-#}
-#
-#-keepclassmembers enum * {
-#    public static **[] values();
-#    public static ** valueOf(java.lang.String);
-#}
-#
-#-keep class * implements android.os.Parcelable {
-#  public static final android.os.Parcelable$Creator *;
-#}
-# 将下面替换成自己的实体类------------------------------
+
 
 -ignorewarnings                     # 忽略警告，避免打包时某些警告出现
 -dontwarn
@@ -97,6 +56,9 @@
 -dontwarn javax.annotation.**
 -keep class javax.annotation.** { *;}
 
+
+#########-------------------第三方 ----------------------------------#############
+#recoo
 -keep class com.dodola.** {*;}
 -keep class com.lody.legend.** {*;}
 
@@ -172,26 +134,3 @@
 }
 -keep enum org.greenrobot.eventbus.ThreadMode { *; }
 
-#
-#
-## Retrofit
-#-dontwarn retrofit2.**
-#-keep class retrofit2.** { *; }
-#-keepattributes Signature
-#-keepattributes Exceptions
-#
-## Retrolambda
-##-dontwarn java.lang.invoke.*
-#
-## RxJava RxAndroid
-#-dontwarn sun.misc.**
-#-keepclassmembers class rx.internal.util.unsafe.*ArrayQueue*Field* {
-#    long producerIndex;
-#    long consumerIndex;
-#}
-#-keepclassmembers class rx.internal.util.unsafe.BaseLinkedQueueProducerNodeRef {
-#    rx.internal.util.atomic.LinkedQueueNode producerNode;
-#}
-#-keepclassmembers class rx.internal.util.unsafe.BaseLinkedQueueConsumerNodeRef {
-#    rx.internal.util.atomic.LinkedQueueNode consumerNode;
-#}

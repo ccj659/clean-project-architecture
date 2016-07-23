@@ -55,23 +55,7 @@ public class BaseApplication extends Application {
     }
 
 
-   /* *//**
-     * 请求网络,看返回参数,如果服务器有补丁包patch.jar就下载,如果没有 就不下载
-     * @return
-     *//*
-    public boolean checkBugs(){
 
-        if (noNeedRepaire){
-            Log.e(TAG, "noNeedRepaire-->" );
-            deletePatch() ;
-        }else {
-            Log.e(TAG, "RocooFix.loadPatch-->" );
-            RocooFix.applyPatch(this, dexPath);
-
-        }
-        return true;
-    }
-*/
 
 
 

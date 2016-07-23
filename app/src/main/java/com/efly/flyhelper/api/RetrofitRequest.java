@@ -1,5 +1,6 @@
 package com.efly.flyhelper.api;
 
+import com.efly.flyhelper.bean.Patch;
 import com.efly.flyhelper.bean.User;
 import com.efly.flyhelper.bean.WeatherData;
 
@@ -35,6 +36,18 @@ public interface RetrofitRequest {
     @Headers( "Content-Type: application/json" )
     @POST(BASE_URL+"Login.ashx/")
     Observable<User> userLogin(@Body HashMap<String, String> body);
+
+
+    /**
+     * 请求补丁(json post)
+     * @param body
+     * @return
+     */
+    @Headers( "Content-Type: application/json" )
+    @POST(BASE_URL+"GetPatch.ashx/")
+    Observable<Patch> getPatch(@Body HashMap<String, String> body);
+
+
 
     /**
      * 获取天气数据(测试)

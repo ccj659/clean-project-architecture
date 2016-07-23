@@ -1,5 +1,6 @@
 package com.efly.flyhelper.api;
 
+import com.efly.flyhelper.bean.Patch;
 import com.efly.flyhelper.bean.User;
 import com.efly.flyhelper.utils.TLog;
 
@@ -40,6 +41,19 @@ public class APIService {
         hashMap.put("UserPassWord", city);
         TLog.log(hashMap.toString());
         Observable<User> ss = apiManager.userLogin(hashMap);
+        return  ss;
+    }
+
+    /**
+     *
+     * @param versionCode 当前versionCode来校验,判断应该返回那个补丁包
+     * @return
+     */
+    public static Observable<Patch> getPatch(String versionCode) {
+        HashMap<String,String> hashMap =new HashMap<>();
+        hashMap.put("VersionCode", versionCode);
+        TLog.log(hashMap.toString());
+        Observable<Patch> ss = apiManager.getPatch(hashMap);
         return  ss;
     }
 

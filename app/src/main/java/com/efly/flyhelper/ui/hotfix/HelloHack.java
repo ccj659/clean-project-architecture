@@ -1,16 +1,19 @@
 package com.efly.flyhelper.ui.hotfix;
 
 /**
- * Created by Administrator on 2016/7/21.
+ * 模拟出错类
+ * 随便改,然后查看是否成功
+ * Created by ccj on 2016/7/21.
  */
 public class HelloHack {
 
+
     public String showHello() {
 
-        String version="version-->:"+3;
-        String sss=" -->ai has bug~~~";
+        String version="versionCode is-->:"+2;
+
         String s ="fixed the bug successful~~";
-        return version+sss+s;
+        return version+s;
     }
 
 
