@@ -10,14 +10,16 @@ import android.util.Log;
 import com.dodola.rocoofix.RocooFix;
 import com.efly.flyhelper.api.APIService;
 import com.efly.flyhelper.bean.Patch;
-import com.efly.flyhelper.utils.EventUtils;
 import com.efly.flyhelper.utils.TLog;
+import com.lidroid.xutils.HttpUtils;
+import com.lidroid.xutils.http.HttpHandler;
+import com.lidroid.xutils.http.ResponseInfo;
+import com.lidroid.xutils.http.callback.RequestCallBack;
 
 import java.io.File;
 import java.util.concurrent.Callable;
 
 import dalvik.system.BaseDexClassLoader;
-import de.greenrobot.event.EventBus;
 import rx.Observable;
 import rx.Observer;
 import rx.Subscriber;
@@ -40,15 +42,17 @@ public class HotFixManger {
     private static String dexPath = Environment.getExternalStorageDirectory().getAbsolutePath().concat("/patch.jar");
     private static Observable<String> saveObservable;
     private static Subscription saveSubscription;
+    private static HttpHandler<File> handler;
     ClassLoader classLoader;
     BaseDexClassLoader baseDexClassLoader;
+
 
     public static void init(Context context) {
         try {
             RocooFix.init(context);
             // installPach(context);
-            downLoadPatch(context);//模拟下载
-            //getPatch(context);需自己配置请求,以及返回参数处理
+            //downLoadPatch(context);//模拟下载
+            getPatch(context);//需自己配置请求,以及返回参数处理
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -81,7 +85,6 @@ public class HotFixManger {
                     @Override
                     public void onError(Throwable e) {
                         Log.e(TAG, "Throwable-->" + e.getMessage().toString());
-                        EventBus.getDefault().post(new EventUtils.ObjectEvent(e.getMessage().toString()));
                     }
 
                     @Override
@@ -95,11 +98,15 @@ public class HotFixManger {
     }
 
     private static void installPach(Context context) {
+        Log.e(TAG, "DownLoadPatch-->");
+
         if (!TextUtils.isEmpty(dexPath)) {
             RocooFix.applyPatch(context, dexPath);
             System.out.println(" installPach" + dexPath);
+            Log.e(TAG, " installPach" + dexPath);
+
         } else {
-            System.out.println(" no  installPach");
+            Log.e(TAG, "no  installPach-->");
         }
     }
 
@@ -134,7 +141,6 @@ public class HotFixManger {
      * 结合retrofit访问网络, 需自己配置请求,以及返回参数处理
      * 例如返回file和code 如果code!=200,就删除patch;反之,就下载到储存卡根目录.然后installPach即可
      *  此次采用 静态修复,即下次启动生效
-     * @param context
      */
     private static void getPatch(final Context context) {
         Observable<Patch> userObservable = APIService
@@ -155,21 +161,89 @@ public class HotFixManger {
                     @Override
                     public void onNext(Patch getInfoResponse) {
                         TLog.log(getInfoResponse.toString());
-                       //todo logic
+                        //todo logic
 
                         if(getInfoResponse.code==200){
                             //将补丁下载到目录dexPath
+                            deletePatch();//删除旧的~
+                            //downLoadPatch(getInfoResponse.details.VersionUrl);
+                            downLoadPatchByXUtls(context,getInfoResponse.details.VersionUrl,dexPath);
                         }else {
-                            //deletePatch
+                            deletePatch();
                         }
+                    }
+                });
+    }
+
+    /**
+     * retrofit 下载,需要自己进行封装 流处理,所以没用
+     * @param URL
+     */
+    private static void downLoadPatch(String URL){
+
+        Observable<File> userObservable = APIService
+                .downPatch(URL);
+        userObservable.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<File>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        TLog.log(e.getMessage().toString());
+                    }
+
+                    @Override
+                    public void onNext(File getInfoResponse) {
+                        TLog.log(getInfoResponse.toString());
+                        //todo logic
+                        Log.e(TAG,"File->"+getInfoResponse.getName()+"-length-"+getInfoResponse.length());
 
                     }
                 });
+    }
 
+    private static void downLoadPatchByXUtls(final Context context, String url, String sdPath){
+
+        HttpUtils http = new HttpUtils();
+         handler = http.download(url, sdPath, true, false,
+                new RequestCallBack<File>() {
+                    @SuppressWarnings("deprecation")
+                    @Override
+                    public void onStart() {
+                        Log.e(TAG,"onStart->");
+
+                    }
+
+                    @Override
+                    public void onLoading(long total, long current,
+                                          boolean isUploading) {
+                        super.onLoading(total, current, isUploading);
+                        Log.e(TAG,"onLoading->");
+                    }
+
+                    @Override
+                    public void onSuccess(ResponseInfo<File> responseInfo) {
+                        Log.e(TAG,"onSuccess->"+responseInfo.result.getName());
+                        installPach(context);
+
+                    }
+
+                    @Override
+                    public void onFailure(com.lidroid.xutils.exception.HttpException e, String s) {
+                        Log.e(TAG,"onfail->");
+                    }
+
+
+                });
 
     }
 
-    private boolean deletePatch() {
+
+    private  static boolean deletePatch() {
         File file = new File(dexPath);
         if (!file.exists()) {
             Log.e(TAG, dexPath + " is null");
@@ -182,8 +256,9 @@ public class HotFixManger {
     }
 
     public void onDestroy() {
-
+        handler.cancel();
     }
+
 
 
 }

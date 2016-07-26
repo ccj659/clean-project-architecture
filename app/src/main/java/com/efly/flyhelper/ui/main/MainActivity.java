@@ -112,7 +112,7 @@ public class MainActivity extends BaseActivity<MainContract.Presenter> implement
     @Override
     public void onBackPressed() {
         // LxApplication.exit();
-        AppManager.getAppManager().AppExit();
+        AppManager.getAppManager().AppExit(this);
     }
 
 }

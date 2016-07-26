@@ -1,6 +1,8 @@
 package com.efly.flyhelper;
 
 import android.app.Activity;
+import android.app.ActivityManager;
+import android.content.Context;
 
 import java.util.Stack;
 
@@ -115,11 +117,25 @@ public class AppManager {
     /**
      * 退出应用程序
      */
-    public void AppExit() {
+    public void AppExit(Context context) {
+
         try {
             finishAllActivity();
             // System.exit(0);
         } catch (Exception e) {
         }
+
+        // 获取packagemanager的实例
+        try {
+            ActivityManager activityMgr = (ActivityManager) context
+                    .getSystemService(Context.ACTIVITY_SERVICE);
+            activityMgr.killBackgroundProcesses(context.getPackageName());
+            activityStack = null;
+            instance=null;
+            System.exit(0);
+        } catch (Exception e) {
+            System.exit(0);
+        }
+
     }
 }

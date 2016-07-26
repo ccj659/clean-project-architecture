@@ -4,6 +4,7 @@ import com.efly.flyhelper.bean.Patch;
 import com.efly.flyhelper.bean.User;
 import com.efly.flyhelper.bean.WeatherData;
 
+import java.io.File;
 import java.util.HashMap;
 
 import retrofit.http.Body;
@@ -11,6 +12,8 @@ import retrofit.http.GET;
 import retrofit.http.Headers;
 import retrofit.http.POST;
 import retrofit.http.Query;
+import retrofit.http.Streaming;
+import retrofit.http.Url;
 import rx.Observable;
 
 /**
@@ -20,7 +23,7 @@ import rx.Observable;
 public interface RetrofitRequest {
 
 
-    boolean isTest=true; //是否在测试环境下
+    boolean isTest=false; //是否在测试环境下
     //发布之前更改
     String BASE_URL_TEST = "/flyapptest/";//测试服务器
     String BASE_URL_OFFICAL = "/flyapp/";//正式服务器
@@ -40,11 +43,13 @@ public interface RetrofitRequest {
 
     /**
      * 请求补丁(json post)
+     * 根据versioncode请求
+     * post:{"VersionCode":"3"}
      * @param body
      * @return
      */
     @Headers( "Content-Type: application/json" )
-    @POST(BASE_URL+"GetPatch.ashx/")
+    @POST(BASE_URL+"Version/GetJar.ashx/")
     Observable<Patch> getPatch(@Body HashMap<String, String> body);
 
 
@@ -59,7 +64,14 @@ public interface RetrofitRequest {
     @GET("/weather/index")
     Observable<WeatherData> getWeatherData(@Query("format") String format, @Query("cityname") String cityname, @Query("key") String key);
 
-    
-    
-    
+
+    /**
+     * 下载补丁
+     * @return
+     */
+    @GET
+    @Streaming
+    Observable<File> downPatch(@Url String url );
+
+
 }
