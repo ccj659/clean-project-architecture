@@ -1,5 +1,15 @@
 
 
+2016/7/23 更新 热修复相关
+
+csdn: http://blog.csdn.net/ccj659/article/details/52004522
+简书: http://www.jianshu.com/p/2301d40dbb33
+
+[热修复]--源码级分析以及项目实践 谢谢大家指正~
+
+----------
+
+
 android架构篇
 ===================
 mvp+rxjava+retrofit+eventBus
