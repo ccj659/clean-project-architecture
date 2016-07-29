@@ -163,6 +163,8 @@ public class HotFixManger {
                         TLog.log(getInfoResponse.toString());
                         //todo logic
 
+
+
                         if(getInfoResponse.code==200){
                             //将补丁下载到目录dexPath
                             deletePatch();//删除旧的~
