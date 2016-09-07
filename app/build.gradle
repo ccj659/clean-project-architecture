@@ -38,32 +38,52 @@ rocoo_fix {
     //针对versionCode的补丁包,一般来说versionCode=3,preVersionPath=2;以此类推较好.
     preVersionPath = '1'
     //插件使用开关
-    enable = true
+    enable = false
     //具体研究要看它的插件com.dodola.rocoofix  RocooFixPlugin
     scanref=true
 
 }
 
-
+ext{
+    libSupportVersion = '23.4.0'
+}
 
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
     compile 'com.dodola:rocoo:1.1'
-    compile 'com.android.support:appcompat-v7:23.4.0'
-    compile 'com.android.support:recyclerview-v7:23.0.0'
-    compile 'com.android.support:cardview-v7:23.0.0'
-    compile 'com.android.support:support-v4:23.0.0'
+
+    /*view相关*/
+    compile "com.android.support:appcompat-v7:${libSupportVersion}"
+    compile "com.android.support:recyclerview-v7:${libSupportVersion}"
+    compile "com.android.support:cardview-v7:${libSupportVersion}"
+    compile "com.android.support:support-v4:${libSupportVersion}"
+    compile "com.github.rey5137:material:1.2.4";
+
+    /*请求网络框架*/
     compile 'io.reactivex:rxandroid:1.1.0'
     compile 'io.reactivex:rxjava:1.1.0'
     compile 'com.squareup.retrofit:retrofit:2.0.0-beta2'
     compile 'com.squareup.retrofit:converter-gson:2.0.0-beta2'
     compile 'com.squareup.retrofit:adapter-rxjava:2.0.0-beta2'
     compile 'org.xutils:xutils:3.3.36'
-    compile 'com.jakewharton:butterknife:7.0.1'
-    compile 'de.greenrobot:eventbus:2.4.0'
-    compile 'com.google.code.gson:gson:2.4'
     compile 'com.mcxiaoke.volley:library:1.0.19'
-    compile files('libs/xUtils-2.6.14.jar')
+    //compile files('libs/xUtils-2.6.14.jar')
+
+
+    /*其他*/
+    compile 'com.jakewharton:butterknife:7.0.1'
+    compile 'org.greenrobot:eventbus:3.0.0'
+    compile 'com.google.code.gson:gson:2.4'
+
+    compile 'com.squareup.picasso:picasso:2.5.0'
+    /*检测内存泄露leakcanary*/
+    debugCompile 'com.squareup.leakcanary:leakcanary-android:1.4-beta2'
+    releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.4-beta2'
+
+
+    //自己的仓库
+    compile 'com.github.ccj659:PermisionLib:v1.0.0'
+
 }

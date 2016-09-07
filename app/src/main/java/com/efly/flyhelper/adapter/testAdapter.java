@@ -4,13 +4,15 @@ import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.efly.flyhelper.adapter.base.BaseListAdapter;
+
 import java.util.ArrayList;
 
 /**
  * 采用继承关系,
  * Created by Administrator on 2016/7/5.
  */
-public class TestAdapter extends BaseListAdapter{
+public class TestAdapter extends BaseListAdapter {
 
 
     public TestAdapter(Context context, ArrayList t) {

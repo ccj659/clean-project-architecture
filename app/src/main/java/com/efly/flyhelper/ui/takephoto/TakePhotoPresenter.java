@@ -6,7 +6,8 @@ import android.util.Log;
 
 import com.efly.flyhelper.utils.EventUtils;
 
-import de.greenrobot.event.EventBus;
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 /**
  * Created by ccj on 2016/7/8.
@@ -66,7 +67,8 @@ public class TakePhotoPresenter implements TakePhotoContract.Presenter {
      * 无论发布者在那个线程,在主线程中订阅
      * @param event
      */
-    public void onEventMainThread(EventUtils.ObjectEvent event) {
+    @Subscribe//(threadMode = ThreadMode.MAIN)
+    public void onEvent(EventUtils.ObjectEvent event) {
         Log.e(TAG, "onEventMainThread getObjectEvent" + event.getMsg());
         Bitmap bitmap=(Bitmap)event.getMsg();
         view.showBitmap(bitmap);
@@ -79,10 +81,10 @@ public class TakePhotoPresenter implements TakePhotoContract.Presenter {
      * @param event
      */
 
-    public void  onEvent(EventUtils.ObjectEvent event){
+   /* public void  onEvent(EventUtils.ObjectEvent event){
         Log.e(TAG, "getObjectEvent" + event.getMsg());
     }
-
+*/
 
 
 }

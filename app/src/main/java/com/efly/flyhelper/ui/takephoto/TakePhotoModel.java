@@ -11,10 +11,11 @@ import com.efly.flyhelper.utils.BitmapUtil;
 import com.efly.flyhelper.utils.EventUtils;
 import com.efly.flyhelper.utils.TLog;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.io.FileNotFoundException;
 import java.util.concurrent.Callable;
 
-import de.greenrobot.event.EventBus;
 import rx.Observable;
 import rx.Observer;
 import rx.Subscription;

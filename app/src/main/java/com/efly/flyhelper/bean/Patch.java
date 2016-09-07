@@ -5,8 +5,8 @@ import com.google.gson.Gson;
 /**
  * Created by Administrator on 2016/7/23.
  */
-public class Patch {
 
+public class Patch {
     /**
      * code : 200
      * msg : 查询成功

@@ -1,4 +1,4 @@
-package com.efly.flyhelper.adapter;
+package com.efly.flyhelper.adapter.base;
 
 import android.content.Context;
 import android.view.View;

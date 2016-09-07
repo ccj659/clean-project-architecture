@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.efly.flyhelper.HotFixManger;
 import com.efly.flyhelper.R;
 import com.efly.flyhelper.utils.SharedPreferenceUtil;
+import com.squareup.leakcanary.LeakCanary;
 
 /**
  * 获取上下文,Toast,以及各种初始化
@@ -38,11 +39,8 @@ public class BaseApplication extends Application {
         //nvwa有坑,在此就不再适用~
        /* Nuwa.init(this);
         Nuwa.loadPatch(this, Environment.getExternalStorageDirectory().getAbsolutePath().concat("/patch.jar"));*/
-
         //打补丁
         HotFixManger.init(this);
-
-
 
     }
 
@@ -51,6 +49,9 @@ public class BaseApplication extends Application {
         super.onCreate();
         context = getBaseContext();
         baseApplication = this;
+        //检测内存泄露
+        LeakCanary.install(this);
+
         SharedPreferenceUtil.initSharedPreference(getApplicationContext());
     }
 
