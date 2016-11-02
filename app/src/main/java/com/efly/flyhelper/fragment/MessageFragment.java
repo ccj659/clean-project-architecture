@@ -92,4 +92,8 @@ public class MessageFragment extends BaseFragment {
     }
 
 
+    @Override
+    public void initView() {
+
+    }
 }

@@ -6,13 +6,16 @@ import android.graphics.drawable.AnimationDrawable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.efly.flyhelper.R;
+import com.squareup.picasso.Picasso;
 
 /**
  * dialog 类库
@@ -75,6 +78,28 @@ public class DialogCreator {
         confirmBtn.setOnClickListener(onClickListener);
         baseDialog.setCancelable(false);
         return baseDialog;
+    }
+
+    public static Dialog createMeiZhiDetailDialog(Context context, String url,
+                                                View.OnClickListener onClickListener) {
+        Dialog baseDialog = new Dialog(context, R.style.dialog_fullscreen_style);
+        LayoutInflater inflater = LayoutInflater.from(context);
+        View v = inflater.inflate(R.layout.dialog_meizhi_detail, null);
+        baseDialog.setContentView(v);
+        ImageView imageview = (ImageView) v.findViewById(R.id.imageview);
+        ImageButton image_exit = (ImageButton) v.findViewById(R.id.image_exit);
+        Picasso .with(context)
+                .load(url)
+                .error(R.mipmap.load_img_error)
+                .into(imageview);
+
+        image_exit.setOnClickListener(onClickListener);
+        baseDialog.setCancelable(false);
+        Window window = baseDialog.getWindow();
+        //window.setGravity(Gravity.BOTTOM);  //此处可以设置dialog显示的位置
+        window.setWindowAnimations(R.style.dialog_common);  //添加动画
+        return baseDialog;
+
     }
 
     /*dialog.getWindow().setLayout((int) (0.8 * mWidth), WindowManager.LayoutParams.WRAP_CONTENT);

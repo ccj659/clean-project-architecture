@@ -103,4 +103,9 @@ public class LoginActivity extends BaseActivity<LoginContract.Presenter> impleme
 
     }
 
+    @Override
+    public void initView() {
+
+
+    }
 }

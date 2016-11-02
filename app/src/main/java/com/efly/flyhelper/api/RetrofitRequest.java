@@ -1,5 +1,6 @@
 package com.efly.flyhelper.api;
 
+import com.efly.flyhelper.bean.Meizhi;
 import com.efly.flyhelper.bean.Patch;
 import com.efly.flyhelper.bean.User;
 import com.efly.flyhelper.bean.WeatherData;
@@ -11,6 +12,7 @@ import retrofit.http.Body;
 import retrofit.http.GET;
 import retrofit.http.Headers;
 import retrofit.http.POST;
+import retrofit.http.Path;
 import retrofit.http.Query;
 import retrofit.http.Streaming;
 import retrofit.http.Url;
@@ -54,6 +56,8 @@ public interface RetrofitRequest {
 
 
 
+
+
     /**
      * 获取天气数据(测试)
      * @param cityname
@@ -63,6 +67,11 @@ public interface RetrofitRequest {
 
     @GET("/weather/index")
     Observable<WeatherData> getWeatherData(@Query("format") String format, @Query("cityname") String cityname, @Query("key") String key);
+
+
+
+    @GET("/api/data/福利/{date}")
+    Observable<Meizhi> getMeiZhi(@Path("date") String date);
 
 
     /**

@@ -12,7 +12,7 @@ import android.view.LayoutInflater;
 /**
  * Created by Administrator on 2016/7/5.
  */
-public class BaseFragment<T extends BasePresenter> extends Fragment implements BaseView{
+public abstract class BaseFragment<T extends BasePresenter> extends Fragment implements BaseView{
 
     private LayoutInflater mInflater;
     private Dialog dialog;
@@ -30,9 +30,6 @@ public class BaseFragment<T extends BasePresenter> extends Fragment implements B
     }
 
 
-    public void initView() {
-
-    }
 
     public void showLoading() {
         if (dialog==null){

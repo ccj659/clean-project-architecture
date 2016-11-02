@@ -7,7 +7,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TabHost;
 import android.widget.TextView;
 
@@ -17,7 +16,7 @@ import com.efly.flyhelper.base.BaseActivity;
 import com.efly.flyhelper.fragment.ContactsFragment;
 import com.efly.flyhelper.fragment.MessageFragment;
 import com.efly.flyhelper.fragment.PersonFragment;
-import com.efly.flyhelper.fragment.UseFragment;
+import com.efly.flyhelper.fragment.meizhi.MeiZhiFragment;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -33,12 +32,10 @@ public class MainActivity extends BaseActivity<MainContract.Presenter> implement
     FrameLayout tabcontent;
     @Bind(android.R.id.tabhost)
     FragmentTabHost mTabHost;
-    @Bind(R.id.main_view)
-    LinearLayout mainView;
     TabHost.TabSpec tabSpec0;
     private TextView tv_count;
-    private Class fragmentArray[] = {MessageFragment.class, ContactsFragment.class, UseFragment.class, PersonFragment.class};
-    private String tabHostTagArray[] = {"消息", "通讯录", "应用", "个人中心"};
+    private Class fragmentArray[] = {MessageFragment.class, MeiZhiFragment.class, ContactsFragment.class, PersonFragment.class};
+    private String tabHostTagArray[] = {"消息演示",  "妹子", "通讯录", "个人中心"};
     private int mImageViewArray[] = {R.drawable.ic_recent, R.drawable.ic_contacts,R.drawable.ic_keypad , R.drawable.ic_person};
 
     private TabHost.OnTabChangeListener tabChangeListener;
@@ -53,12 +50,17 @@ public class MainActivity extends BaseActivity<MainContract.Presenter> implement
         mPresenter = new MainPresenter(this);
         mPresenter.start();
     }
+
+
+
+
+
     @Override
     public void initToolBar() {
-        toolbar.setBackgroundColor(getResources().getColor(R.color.blue));
+        toolbar.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
         //toolbar.setNavigationIcon(R.mipmap.back);
         toolbar_title=(TextView)findViewById(R.id.toolbar_title);
-        toolbar.setTitle("");
+        //toolbar.setTitle("");
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

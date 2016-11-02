@@ -11,14 +11,14 @@
         android:layout_gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="msg"
         />
+
     <com.rey.material.widget.Button
         android:id="@+id/button_bt_raise_color"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="BUTTON"
-        />
+        android:text="Hello "
+        android:layout_gravity="center_horizontal" />
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

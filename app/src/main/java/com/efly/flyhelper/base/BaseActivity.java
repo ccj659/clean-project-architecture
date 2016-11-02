@@ -73,4 +73,8 @@ public  class BaseActivity<T extends BasePresenter>
     }
 
 
+    @Override
+    public void initView() {
+
+    }
 }

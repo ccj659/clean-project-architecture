@@ -29,7 +29,10 @@ public abstract class BaseRecycleAdapter<T> extends RecyclerView.Adapter<BaseRec
     public void setOnItemLongClickListener(ItemLongClickListener onItemLongClickListener){
         this.onItemLongClickListener=onItemLongClickListener;
     }
-
+    public void setData(List<T> list){
+        this.tList = list;
+        notifyDataSetChanged();
+    }
 
    /* @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -44,7 +47,7 @@ public abstract class BaseRecycleAdapter<T> extends RecyclerView.Adapter<BaseRec
 
     @Override
     public int getItemCount() {
-        return tList.size();
+        return tList==null?0:tList.size();
     }
 
 

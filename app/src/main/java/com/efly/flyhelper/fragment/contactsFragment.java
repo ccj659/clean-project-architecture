@@ -80,4 +80,9 @@ public class ContactsFragment extends BaseFragment {
         super.onDestroyView();
         ButterKnife.unbind(this);
     }
+
+    @Override
+    public void initView() {
+
+    }
 }

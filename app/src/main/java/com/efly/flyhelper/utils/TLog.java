@@ -29,9 +29,9 @@ public class TLog {
 			Log.e(tag, log);
 	}
 
-	public static final void logv(String log) {
+	public static final void logI(String log) {
 		if (DEBUG)
-			Log.v(LOG_TAG, log);
+			Log.i(LOG_TAG, log);
 	}
 
 	public static final void warn(String log) {

@@ -22,8 +22,8 @@ android {
         }
 
         debug {
-            minifyEnabled true
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            //minifyEnabled f
+            //proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
 
     }
@@ -55,12 +55,13 @@ dependencies {
     compile 'com.dodola:rocoo:1.1'
 
     /*view相关*/
+    compile "com.android.support:design:${libSupportVersion}"
     compile "com.android.support:appcompat-v7:${libSupportVersion}"
     compile "com.android.support:recyclerview-v7:${libSupportVersion}"
     compile "com.android.support:cardview-v7:${libSupportVersion}"
     compile "com.android.support:support-v4:${libSupportVersion}"
     compile "com.github.rey5137:material:1.2.4";
-
+    compile 'com.dinuscxj:pullzoomrecyclerview:1.0.2'
     /*请求网络框架*/
     compile 'io.reactivex:rxandroid:1.1.0'
     compile 'io.reactivex:rxjava:1.1.0'
@@ -70,7 +71,10 @@ dependencies {
     compile 'org.xutils:xutils:3.3.36'
     compile 'com.mcxiaoke.volley:library:1.0.19'
     //compile files('libs/xUtils-2.6.14.jar')
-
+    //图片请求
+    compile 'com.squareup.picasso:picasso:2.5.2'
+    //recycleView开源库
+    compile 'com.wuxiaolong.pullloadmorerecyclerview:library:1.1.1'
 
     /*其他*/
     compile 'com.jakewharton:butterknife:7.0.1'

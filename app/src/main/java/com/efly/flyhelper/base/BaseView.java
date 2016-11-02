@@ -6,5 +6,5 @@ package com.efly.flyhelper.base;
 public interface BaseView {
 
 
-
+    void initView();
 }
