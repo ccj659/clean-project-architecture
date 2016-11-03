@@ -1,5 +1,11 @@
+2016/11/1 更新 用gank.io的妹子数据,准备开发一个完整app
 
-
+	1.添加get请求.
+	
+	2.完成妹子Meterial Design 风格的list界面.
+	
+	
+-------
 2016/7/23 更新 热修复相关
 
 csdn: http://blog.csdn.net/ccj659/article/details/52004522
