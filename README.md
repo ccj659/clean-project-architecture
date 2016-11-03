@@ -5,8 +5,11 @@
 	2.完成妹子Meterial Design 风格的list界面.
 	
 	
+参考界面:
+![](http://i.imgur.com/EnBxczU.gif)
+
 -------
-2016/7/23 更新 热修复相关
+2016/7/23 更新  热修复相关
 
 csdn: http://blog.csdn.net/ccj659/article/details/52004522
 简书: http://www.jianshu.com/p/2301d40dbb33
