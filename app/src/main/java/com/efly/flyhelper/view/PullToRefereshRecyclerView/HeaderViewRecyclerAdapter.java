@@ -22,6 +22,7 @@ public class HeaderViewRecyclerAdapter extends RecyclerView.Adapter<RecyclerView
     private static final int ITEMS_START = Integer.MIN_VALUE + 20;
     private static final int ADAPTER_MAX_TYPES = 100;
 
+
     private RecyclerView.Adapter mWrappedAdapter;
     private List<View> mHeaderViews, mFooterViews;
     private Map<Class, Integer> mItemTypesOffset;
