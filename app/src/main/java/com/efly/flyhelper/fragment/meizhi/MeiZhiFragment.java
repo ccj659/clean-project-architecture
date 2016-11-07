@@ -67,7 +67,6 @@ public class MeiZhiFragment extends BaseFragment<MeiZhiContract.Presenter> imple
         if(meiZhiPresenter==null){
             meiZhiPresenter = new MeiZhiPresenter(this);
             meiZhiPresenter.start();
-
         }
 
 

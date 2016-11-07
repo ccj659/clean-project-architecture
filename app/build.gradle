@@ -75,7 +75,6 @@ dependencies {
     compile 'com.squareup.picasso:picasso:2.5.2'
     //recycleView开源库
     compile 'com.wuxiaolong.pullloadmorerecyclerview:library:1.1.1'
-
     /*其他*/
     compile 'com.jakewharton:butterknife:7.0.1'
     compile 'org.greenrobot:eventbus:3.0.0'
