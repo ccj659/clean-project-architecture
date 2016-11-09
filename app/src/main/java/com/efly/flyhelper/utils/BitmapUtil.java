@@ -1,26 +1,18 @@
 package com.efly.flyhelper.utils;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Rect;
 import android.net.Uri;
 import android.os.Environment;
-import android.os.Handler;
-import android.os.Looper;
-import android.os.Message;
 import android.util.Log;
-import android.widget.Toast;
 
 import java.io.BufferedOutputStream;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -40,54 +32,8 @@ public class BitmapUtil {
     private boolean getAllPicIsRun = true;
     private int pic2=0,pic1=0;
 
-    //使用broadcast发送图片
-    public  Handler handler = new Handler(Looper.getMainLooper()) {
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            switch (msg.what) {
-                case 0:
-                    Log.e("getAllPic", "getAllPic is ok");
-                    break;
-                case 1:
-                    Log.e("savePic", "savePicing is ok");
-
-                    break;
-                case 2:
-                    Log.e("savePic", "tempFile"+pic1);
-                    if (pic1==1){
-                        Intent intent = new Intent("android.intent.action.MY_BROADCAST");
-                        intent.putExtra("msg", "1");
-                        context.sendBroadcast(intent);
-                    }else if (pic1==2) {
-                        Intent intent = new Intent("android.intent.action.MY_BROADCAST");
-                        intent.putExtra("msg", "2");
-                        context.sendBroadcast(intent);
-                    }
-                    break;
-                case -2:
-                    Log.e("savePic", "IOException");
-                    break;
-            }
-        }
-    };
-
     public BitmapUtil(Context context){
         BitmapUtil.context =context;
-    }
-    public static BitmapUtil initBitmapUtil(Context context) {
-
-        if (bitmapUtil == null) {
-            bitmapUtil = new BitmapUtil(context);
-        }
-        return bitmapUtil;
-    }
-    public static   BitmapUtil getInstance() {
-
-        if (bitmapUtil == null) {
-            bitmapUtil = new BitmapUtil(context);
-        }
-        return bitmapUtil;
     }
 
     /**
@@ -175,43 +121,6 @@ public class BitmapUtil {
 
     }
 
-    public static Bitmap compressImage(Bitmap image, int imageSize) {
-
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        image.compress(Bitmap.CompressFormat.JPEG, 100, baos);//质量压缩方法，这里100表示不压缩，把压缩后的数据存放到baos中
-        int options = 100;
-        while (baos.toByteArray().length / 1024 > imageSize) {  //循环判断如果压缩后图片是否大于100kb,大于继续压缩
-            baos.reset();//重置baos即清空baos
-            image.compress(Bitmap.CompressFormat.JPEG, options, baos);//这里压缩options%，把压缩后的数据存放到baos中
-            options -= 10;//每次都减少10
-        }
-        ByteArrayInputStream isBm = new ByteArrayInputStream(baos.toByteArray());//把压缩后的数据baos存放到ByteArrayInputStream中
-        Bitmap bitmap = BitmapFactory.decodeStream(isBm, null, null);//把ByteArrayInputStream数据生成图片
-        return bitmap;
-    }
-
-    //尺寸压缩：
-    public static Bitmap scalePic(InputStream inputStream, int reqWidth, int reqHeight) {
-        BitmapFactory.Options options = new BitmapFactory.Options();
-        options.inJustDecodeBounds = true;
-        //BitmapFactory.decodeResource(context.getResources(), R.mipmap.demo, options);
-
-        options.inSampleSize = calculateInSampleSize(options, reqWidth, reqHeight);
-        options.inJustDecodeBounds = false;
-        Bitmap bitmap = BitmapFactory.decodeStream(inputStream, new Rect(5, 5, 5, 5), options);
-        return bitmap;
-        // postInvalidate();
-    }
-
-    public static byte[] Bitmap2Bytes(Bitmap bm) {
-        Log.e(TAG, bm.getByteCount() + "getByteCount");
-        bm = compressImage(bm, 100);
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bm.compress(Bitmap.CompressFormat.PNG, 100, baos);
-        Log.e(TAG, baos.toByteArray().length + "length");
-        return baos.toByteArray();
-    }
-
     public static int calculateInSampleSize(BitmapFactory.Options options, int reqWidth, int reqHeight) {
         final int height = options.outHeight;
         final int width = options.outWidth;
@@ -240,98 +149,8 @@ public class BitmapUtil {
     }
 
 
-    /*
-    * 质量压缩保存：
-    * */
-
-    public int savePic(Context context, final File file, final Bitmap bitmap) {
-        Log.e("savePic", "init isRun");
-        isRun = true;
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-
-                while (isRun) {
-                    //compressImage(bitmap,)
-                    BufferedOutputStream bos = null;
-                    try {
-                        bos = new BufferedOutputStream(new FileOutputStream(file));
-                        Bitmap temp = comp(bitmap);//图片压缩
-                        temp.compress(Bitmap.CompressFormat.JPEG, 80, bos);
-                        bos.flush();
-                        bos.close();
-                        isRun = false;
-
-                        handler.sendEmptyMessage(1);
-                    } catch (FileNotFoundException e) {
-                        e.printStackTrace();
-                        handler.sendEmptyMessage(-1);
-                        isRun = false;
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                        handler.sendEmptyMessage(-2);
-                        isRun = false;
-                    }
-
-                }
-            }
-        }).start();
-        Intent intent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
-        Uri uri = Uri.fromFile(file);
-        intent.setData(uri);
-        context.sendBroadcast(intent);
-        return 1;
-    }
-    public synchronized int saveTempPic(Context context, final File file, final Bitmap bitmap, final int key) {
-        tempFile=file;
-        if (tempFile==null){
-            Toast.makeText(context,"照片已损坏",Toast.LENGTH_SHORT).show();
-            return -1;
-        }
-        Log.e("savePic", file.getAbsolutePath());
-        isRun = true;
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                while (isRun) {
-                    //compressImage(bitmap,)
-                    BufferedOutputStream bos = null;
-                    try {
-                        bos = new BufferedOutputStream(new FileOutputStream(file));
-                        Bitmap temp = comp(bitmap);//图片压缩
-
-                        if (bos!=null&&temp!=null){
-                            temp.compress(Bitmap.CompressFormat.JPEG, 80, bos);
-                            bos.flush();
-                            bos.close();
-                        }
-
-                        isRun = false;
-                        if ( key==1){
-                            pic1=1;
-                        }else if ( key==2) {
-                            pic1=2;
-                        }
-
-                        handler.sendEmptyMessage(2);
-                    } catch (FileNotFoundException e) {
-                        //e.printStackTrace();
-                        handler.sendEmptyMessage(-1);
-                        isRun = false;
-                    } catch (IOException e) {
-                        //e.printStackTrace();
-                        handler.sendEmptyMessage(-1);
-                        isRun = false;
-                    }
-
-                }
-            }
-        }).start();
-        return 1;
-    }
-
     //纯粹的压缩图片
-    public Bitmap comp(Bitmap image) {
+    public static Bitmap comp(Bitmap image) {
         if (image==null){
             return null;
         }
@@ -398,7 +217,7 @@ public class BitmapUtil {
     }
 
     //质量压缩图片
-    private Bitmap compressImage(Bitmap image) {
+    private static Bitmap compressImage(Bitmap image) {
 
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         image.compress(Bitmap.CompressFormat.JPEG, 100, baos);//质量压缩方法，这里100表示不压缩，把压缩后的数据存放到baos中

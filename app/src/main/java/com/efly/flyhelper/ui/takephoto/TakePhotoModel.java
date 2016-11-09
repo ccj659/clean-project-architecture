@@ -85,7 +85,8 @@ public class TakePhotoModel implements TakePhotoContract.Model {
             opt.inInputShareable = true;
             Bitmap temp = BitmapFactory
                     .decodeStream(BaseApplication.getContext().getContentResolver().openInputStream(selectedImage), null, opt);
-            bitmap = BitmapUtil.getInstance().comp(temp);//图片压缩
+
+            bitmap = BitmapUtil.comp(temp);//图片压缩
             return "ok";
         } catch (FileNotFoundException e) {
             Log.e("cameraBitmap", "-----FileNotFoundException---" + selectedImage.toString());

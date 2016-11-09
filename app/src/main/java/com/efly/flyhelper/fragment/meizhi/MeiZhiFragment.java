@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +18,6 @@ import com.efly.flyhelper.adapter.base.ItemClickListener;
 import com.efly.flyhelper.base.BaseApplication;
 import com.efly.flyhelper.base.BaseFragment;
 import com.efly.flyhelper.bean.Meizhi;
-import com.efly.flyhelper.fragment.UseFragment;
 import com.efly.flyhelper.utils.DialogCreator;
 import com.efly.flyhelper.utils.TLog;
 import com.efly.flyhelper.view.CustomItemAnimator;
@@ -36,7 +36,7 @@ import butterknife.ButterKnife;
 public class MeiZhiFragment extends BaseFragment<MeiZhiContract.Presenter> implements MeiZhiContract.View {
 
 
-    private static final String TAG = UseFragment.class.getSimpleName();
+    private static final String TAG = MeiZhiFragment.class.getSimpleName();
     @Bind(R.id.srl)
     SwipeRefreshLayout swipeRefreshLayout;
     @Bind(R.id.recycler_view)
@@ -49,6 +49,7 @@ public class MeiZhiFragment extends BaseFragment<MeiZhiContract.Presenter> imple
     private MeiZhiPresenter meiZhiPresenter;
     private LinearLayoutManager linearLayoutManager;
     private Dialog dialog;
+    private StaggeredGridLayoutManager mLayoutManager;
 
     @Nullable
     @Override
@@ -77,7 +78,9 @@ public class MeiZhiFragment extends BaseFragment<MeiZhiContract.Presenter> imple
     public void initView() {
         constantAdapter = new MeiZhiAdapter(meiZhi, getActivity());
         linearLayoutManager = new LinearLayoutManager(getActivity());
+        //mLayoutManager = new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(linearLayoutManager);
+
         recyclerView.setItemAnimator(new CustomItemAnimator());
         recyclerView.setAdapter(constantAdapter);
     }
@@ -123,12 +126,15 @@ public class MeiZhiFragment extends BaseFragment<MeiZhiContract.Presenter> imple
     public void setListener() {
 
         recyclerView.addOnScrollListener(new EndlessRecyclerOnScrollListener(linearLayoutManager) {
+
+
             @Override
-            public void onLoadMore(int currentPage) {
+            public void onLoadMore() {
                 TLog.logI("onLoadMore");
                 meiZhiPresenter.loadMoreMeizhi(--page);
             }
         });
+
         constantAdapter.setOnItemClickListener(new ItemClickListener() {
             @Override
             public void onClick(int position) {

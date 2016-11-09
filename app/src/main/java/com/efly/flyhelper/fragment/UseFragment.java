@@ -17,7 +17,6 @@ import com.efly.flyhelper.bean.Meizhi;
 import com.efly.flyhelper.utils.DateStringUtils;
 import com.efly.flyhelper.utils.TLog;
 import com.efly.flyhelper.view.CustomItemAnimator;
-import com.efly.flyhelper.view.PullToRefereshRecyclerView.EndlessRecyclerOnScrollListener;
 import com.efly.flyhelper.view.PullToRefereshRecyclerView.HeaderViewRecyclerAdapter;
 
 import java.util.ArrayList;
@@ -115,13 +114,13 @@ public class UseFragment extends BaseFragment {
         stringAdapter = new HeaderViewRecyclerAdapter(constantAdapter);
         recyclerView.setAdapter(constantAdapter);
         createLoadMoreView();
-        recyclerView.addOnScrollListener(new EndlessRecyclerOnScrollListener(linearLayoutManager) {
+       /* recyclerView.addOnScrollListener(new EndlessRecyclerOnScrollListener(linearLayoutManager) {
             @Override
             public void onLoadMore(int currentPage) {
                 TLog.logI("onLoadMore");
                 loadMeizhi(DateStringUtils.getBeforeStringDate(--page));
             }
-        });
+        });*/
 
         swipeRefreshLayout.setColorSchemeResources(android.R.color.holo_orange_light,
                 android.R.color.holo_green_light,
