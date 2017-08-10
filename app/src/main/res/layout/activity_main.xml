@@ -30,11 +30,10 @@
              android:gravity="center"
              android:layout_gravity="center"
              />
-      </android.support.v7.widget.Toolbar>>
+      </android.support.v7.widget.Toolbar>
 
    </android.support.design.widget.AppBarLayout>
 
-<!--<include layout="@layout/view_tool_bar"></include-->>
 <include layout="@layout/content_main"></include>
 
   <!-- <android.support.design.widget.FloatingActionButton

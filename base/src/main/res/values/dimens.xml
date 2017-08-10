@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <!--margin or padding-->
+    <dimen name="space_8">8.0dip</dimen>
+    <dimen name="small_container_padding">5dp</dimen>
+    <dimen name="common_container_padding">10dp</dimen>
+    <dimen name="medium_container_padding">20dp</dimen>
+    <dimen name="large_container_padding">30dp</dimen>
+    <dimen name="min_container_padding">2dp</dimen>
+    <dimen name="large_top_margin">80dp</dimen>
+    <dimen name="common_dark_border">2dp</dimen>
+    <dimen name="small_dark_border">1dp</dimen>
+
+    <dimen name="radius">5dp</dimen>
+    <dimen name="large_radius">10dp</dimen>
+
+    <dimen name="small_text_size">16sp</dimen>
+    <dimen name="common_text_size">18sp</dimen>
+    <dimen name="large_text_size">22sp</dimen>
+
+    <dimen name="msg_pic_width">400dp</dimen>
+    <dimen name="msg_pic_high">200dp</dimen>
+    <dimen name="text_medium_size">18sp</dimen>
+
+</resources>

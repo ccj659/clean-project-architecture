@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">ModuleArchitect</string>
+    <string name="no_more">没有更多了</string>
+
+
+    <!-- Error View -->
+    <string name="error_view_click_to_refresh">点击屏幕,重新加载</string>
+    <string name="error_view_no_data">暂无内容</string>
+    <string name="error_view_loading">加载中…</string>
+    <string name="error_view_load_error_click_to_refresh">内容加载失败\r\n点击重新加载</string>
+    <string name="error_view_network_error_click_to_refresh">没有可用的网络</string>
+    <string name="tip_network_error">没有可用的网络</string>
+    <string name="show_loading_msg" >正在加载...</string>
+
+</resources>

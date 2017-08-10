@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+
+    <!-- <color name="colorPrimary">#FF03A9F4</color>
+     <color name="colorPrimaryDark">#ff0171c9</color>
+     <color name="colorAccent">#FF00E5FF</color>-->
+    <color name="colorControlNormal">#FF78909C</color>
+    <color name="colorControlActivated">#FF03A9F4</color>
+    <color name="colorSwitchThumbNormal">#FF78909C</color>
+    <color name="primary">#FF03A9F4</color>
+    <color name="primary_dark">#FF0288D1</color>
+    <color name="status_bar_color">@color/primary_dark</color>
+
+
+    <color name="red_dark">#bc1717</color>
+    <color name="red_bg">#dd4b39</color>
+    <color name="window_bg">@android:color/white</color>
+    <color name="btn_blue_bg">#6699ff</color>
+    <color name="btn_blue_bg_press">#3366cc</color>
+    <color name="app_bg">#f2f2f2</color>
+    <color name="touming_bg">#00000000</color>
+    <color name="yellow">#ffcc00</color>
+
+    <color name="white">@android:color/white</color>
+    <color name="black">@android:color/black</color>
+    <color name="blue" >#2b8cff</color>
+    <color name="red"> #ff3824</color>
+    <color name="btn_dark">#929292</color>
+    <color name="menu_bg">#f8f8f9</color>
+    <color name="border_dark">#c9c9c9</color>
+    <color name="shallow_blue">#70dbdb</color>
+    <color name="item_click_bg_color">#dddddd</color>
+    <color name="tans">#00000000</color>
+
+
+    <color name="tool_bar_white">@android:color/white</color>
+
+</resources>

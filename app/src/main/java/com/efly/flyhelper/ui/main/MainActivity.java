@@ -10,33 +10,32 @@ import android.widget.ImageView;
 import android.widget.TabHost;
 import android.widget.TextView;
 
-import com.efly.flyhelper.AppManager;
+import com.ccj.base.AppManager;
+import com.ccj.base.base.BaseActivity;
 import com.efly.flyhelper.R;
-import com.efly.flyhelper.base.BaseActivity;
-import com.efly.flyhelper.fragment.ContactsFragment;
 import com.efly.flyhelper.fragment.MessageFragment;
 import com.efly.flyhelper.fragment.PersonFragment;
 import com.efly.flyhelper.fragment.meizhi.MeiZhiFragment;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class MainActivity extends BaseActivity<MainContract.Presenter> implements MainContract.View {
 
     private static final String TAG = MainActivity.class.getSimpleName();
-    @Bind(R.id.toolbar)
+    @BindView(R.id.toolbar)
     Toolbar toolbar;
-    @Bind(R.id.realtabcontent)
+    @BindView(R.id.realtabcontent)
     FrameLayout realtabcontent;
-    @Bind(android.R.id.tabcontent)
+    @BindView(android.R.id.tabcontent)
     FrameLayout tabcontent;
-    @Bind(android.R.id.tabhost)
+    @BindView(android.R.id.tabhost)
     FragmentTabHost mTabHost;
     TabHost.TabSpec tabSpec0;
     private TextView tv_count;
-    private Class fragmentArray[] = {MessageFragment.class, MeiZhiFragment.class, ContactsFragment.class, PersonFragment.class};
-    private String tabHostTagArray[] = {"消息演示",  "妹子", "通讯录", "个人中心"};
-    private int mImageViewArray[] = {R.drawable.ic_recent, R.drawable.ic_contacts,R.drawable.ic_keypad , R.drawable.ic_person};
+    private Class fragmentArray[] = {MessageFragment.class, MeiZhiFragment.class, PersonFragment.class};
+    private String tabHostTagArray[] = {"消息演示",  "妹子", "个人中心"};
+    private int mImageViewArray[] = {R.drawable.ic_recent, R.drawable.ic_keypad , R.drawable.ic_person};
 
     private TabHost.OnTabChangeListener tabChangeListener;
     private String currentTab=tabHostTagArray[0];
@@ -108,8 +107,6 @@ public class MainActivity extends BaseActivity<MainContract.Presenter> implement
         textView.setText(tabHostTagArray[index]);
         return view;
     }
-
-
 
     @Override
     public void onBackPressed() {

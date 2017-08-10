@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         />
 
-    <com.rey.material.widget.Button
+    <Button
         android:id="@+id/button_bt_raise_color"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

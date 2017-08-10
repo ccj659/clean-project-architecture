@@ -6,8 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.ccj.base.base.BaseFragment;
 import com.efly.flyhelper.R;
-import com.efly.flyhelper.base.BaseFragment;
 
 /**
  * Created by Administrator on 2016/7/7.

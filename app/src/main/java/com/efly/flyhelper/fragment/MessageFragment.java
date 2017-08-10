@@ -1,6 +1,5 @@
 package com.efly.flyhelper.fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -10,13 +9,14 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.alibaba.android.arouter.launcher.ARouter;
+import com.ccj.base.Constants;
+import com.ccj.base.base.BaseFragment;
+import com.ccj.base.utils.hotfix.HelloHack;
+import com.ccj.base.utils.router.RouterConstants;
 import com.efly.flyhelper.R;
-import com.efly.flyhelper.base.BaseFragment;
-import com.efly.flyhelper.ui.hotfix.HelloHack;
-import com.efly.flyhelper.ui.login.LoginActivity;
-import com.efly.flyhelper.ui.takephoto.TakePhotoActivity;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
@@ -25,13 +25,13 @@ import butterknife.OnClick;
  */
 public class MessageFragment extends BaseFragment {
 
-    @Bind(R.id.button2)
+    @BindView(R.id.button2)
     Button button2;
-    @Bind(R.id.button3)
+    @BindView(R.id.button3)
     Button button3;
-    @Bind(R.id.textview)
+    @BindView(R.id.textview)
     TextView textview;
-    @Bind(R.id.button5)
+    @BindView(R.id.button5)
     Button button5;
     private View view;
     private static final String TAG = MessageFragment.class.getSimpleName();
@@ -53,12 +53,6 @@ public class MessageFragment extends BaseFragment {
 
     }
 
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        ButterKnife.unbind(this);
-    }
 
     @OnClick({R.id.button2, R.id.button3,R.id.button5})
     public void onClick(View view) {
@@ -82,13 +76,17 @@ public class MessageFragment extends BaseFragment {
     }
 
     private void navigateToLogin() {
-        Intent intent = new Intent(getActivity(), LoginActivity.class);
-        startActivity(intent);
+        ARouter.getInstance().build(RouterConstants.LOGIN_MOUDLE_ACTIVITY).
+                withString(Constants.START_LOGIN_WITH_PARAMS, "I am params from MainActivity").
+                navigation(getActivity(), Constants.REQUEST_START_LOGIN);
     }
 
     private void navigateTakePhoto() {
-        Intent intent = new Intent(getActivity(), TakePhotoActivity.class);
-        startActivity(intent);
+        ARouter.getInstance().
+                build(RouterConstants.VIDEO_MUDULE_ACTIVITY).
+                withString(Constants.START_LOGIN_WITH_PARAMS, "I am params from MainActivity").
+                navigation();
+
     }
 
 

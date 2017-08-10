@@ -1,9 +1,10 @@
 package com.efly.flyhelper.fragment.meizhi;
 
-import com.efly.flyhelper.base.BasePresenter;
-import com.efly.flyhelper.base.BaseView;
+
+import com.ccj.base.base.BasePresenter;
+import com.ccj.base.base.BaseView;
+import com.ccj.base.bean.User;
 import com.efly.flyhelper.bean.Meizhi;
-import com.efly.flyhelper.bean.User;
 
 import java.util.ArrayList;
 

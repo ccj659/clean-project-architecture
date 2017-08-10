@@ -1,92 +1,72 @@
 apply plugin: 'com.android.application'
-apply plugin: 'com.dodola.rocoofix'
 repositories {
     jcenter()
 }
 android {
-    compileSdkVersion 23
-    buildToolsVersion "23.0.3"
 
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
     defaultConfig {
         applicationId "com.efly.flyhelper"
-        minSdkVersion 15
-        targetSdkVersion 23
-        versionCode 2
-        multiDexEnabled true
-        versionName "1.0"
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode rootProject.ext.versionCode
+        versionName rootProject.ext.versionName
+        multiDexEnabled false
+
+        //arouter
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [moduleName: project.getName()]
+            }
+        }
     }
     buildTypes {
         release {
-            minifyEnabled true//混淆一定要开
+            //更改AndroidManifest.xml中预先定义好占位符信息
+            //manifestPlaceholders = [app_icon: "@drawable/icon"]
+            // 不显示Log
+            buildConfigField "boolean", "LEO_DEBUG", "false"
+            //是否zip对齐
+            zipAlignEnabled true
+            // 缩减resource文件
+            shrinkResources true
+            //Proguard
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
 
         debug {
-            //minifyEnabled f
-            //proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            //给applicationId添加后缀“.debug”
+            applicationIdSuffix ".debug"
+            //manifestPlaceholders = [app_icon: "@drawable/launch_beta"]
+            buildConfigField "boolean", "LOG_DEBUG", "true"
+            zipAlignEnabled false
+            shrinkResources false
+            minifyEnabled false
+            debuggable true
         }
-
     }
 
-}
-
-rocoo_fix {
-
-    //includePackage = ['com.efly.flyhelper']
-    //不被打包的类~
-    excludeClass = ['BaseApplication.class','HotFixManger.class','BaseActivity.class']
-    //针对versionCode的补丁包,一般来说versionCode=3,preVersionPath=2;以此类推较好.
-    preVersionPath = '1'
-    //插件使用开关
-    enable = false
-    //具体研究要看它的插件com.dodola.rocoofix  RocooFixPlugin
-    scanref=true
-
-}
-
-ext{
-    libSupportVersion = '23.4.0'
 }
 
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    testCompile 'junit:junit:4.12'
-    compile 'com.dodola:rocoo:1.1'
-
-    /*view相关*/
-    compile "com.android.support:design:${libSupportVersion}"
-    compile "com.android.support:appcompat-v7:${libSupportVersion}"
-    compile "com.android.support:recyclerview-v7:${libSupportVersion}"
-    compile "com.android.support:cardview-v7:${libSupportVersion}"
-    compile "com.android.support:support-v4:${libSupportVersion}"
-    compile "com.github.rey5137:material:1.2.4";
-    compile 'com.dinuscxj:pullzoomrecyclerview:1.0.2'
-    /*请求网络框架*/
-    compile 'io.reactivex:rxandroid:1.1.0'
-    compile 'io.reactivex:rxjava:1.1.0'
-    compile 'com.squareup.retrofit:retrofit:2.0.0-beta2'
-    compile 'com.squareup.retrofit:converter-gson:2.0.0-beta2'
-    compile 'com.squareup.retrofit:adapter-rxjava:2.0.0-beta2'
-    compile 'org.xutils:xutils:3.3.36'
-    compile 'com.mcxiaoke.volley:library:1.0.19'
-    //compile files('libs/xUtils-2.6.14.jar')
-    //图片请求
-    compile 'com.squareup.picasso:picasso:2.5.2'
-    //recycleView开源库
-    compile 'com.wuxiaolong.pullloadmorerecyclerview:library:1.1.1'
-    /*其他*/
-    compile 'com.jakewharton:butterknife:7.0.1'
-    compile 'org.greenrobot:eventbus:3.0.0'
-    compile 'com.google.code.gson:gson:2.4'
-
-    compile 'com.squareup.picasso:picasso:2.5.0'
-    /*检测内存泄露leakcanary*/
-    debugCompile 'com.squareup.leakcanary:leakcanary-android:1.4-beta2'
-    releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.4-beta2'
 
 
-    //自己的仓库
-    compile 'com.github.ccj659:PermisionLib:v1.0.0'
+    //arouter
+    annotationProcessor rootProject.ext.arouterCompiler
+
+    //butterknife
+    annotationProcessor rootProject.ext.butterknifeCompiler
+
+    if (isModule.toBoolean()) {
+        //当isDebug true，app得依赖基础库，保证app不报错
+        compile project(':base')
+    } else {
+        compile project(':loginmodule')
+        compile project(':videomodule')
+    }
 
 }

@@ -5,7 +5,7 @@ import com.google.gson.Gson;
 /**
  * Created by Administrator on 2016/7/23.
  */
-
+@Deprecated
 public class Patch {
     /**
      * code : 200

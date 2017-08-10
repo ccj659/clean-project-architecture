@@ -6,8 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.ccj.base.adapter.BaseRecycleAdapter;
 import com.efly.flyhelper.R;
-import com.efly.flyhelper.adapter.base.BaseRecycleAdapter;
 import com.efly.flyhelper.bean.Meizhi;
 import com.squareup.picasso.Picasso;
 
@@ -40,7 +40,7 @@ public class MeiZhiAdapter extends BaseRecycleAdapter<Meizhi.ResultsBean> {
             constantHolder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    onItemClickListener.onClick(holder.getAdapterPosition());
+                    onItemClickListener.onItemClick(holder.getAdapterPosition());
                 }
             });
         }

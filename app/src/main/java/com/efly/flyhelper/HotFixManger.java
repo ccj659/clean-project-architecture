@@ -7,14 +7,7 @@ import android.os.Environment;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.dodola.rocoofix.RocooFix;
-import com.efly.flyhelper.api.APIService;
-import com.efly.flyhelper.bean.Patch;
-import com.efly.flyhelper.utils.TLog;
-import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.http.HttpHandler;
-import com.lidroid.xutils.http.ResponseInfo;
-import com.lidroid.xutils.http.callback.RequestCallBack;
 
 import java.io.File;
 import java.util.concurrent.Callable;
@@ -22,7 +15,6 @@ import java.util.concurrent.Callable;
 import dalvik.system.BaseDexClassLoader;
 import rx.Observable;
 import rx.Observer;
-import rx.Subscriber;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -36,7 +28,7 @@ import rx.schedulers.Schedulers;
  * 4.下次启动再请求网络,得到数据,根据数据判断补丁版本是否对应, 然后进行上述操作~,
  * Created by ccj on 2016/7/22.
  */
-
+@Deprecated
 public class HotFixManger {
     private static final String TAG = "HotFixManger-->";
     private static String dexPath = Environment.getExternalStorageDirectory().getAbsolutePath().concat("/patch.jar");
@@ -47,9 +39,9 @@ public class HotFixManger {
     BaseDexClassLoader baseDexClassLoader;
 
 
-    public static void init(Context context) {
+   /* public static void init(Context context) {
         try {
-            RocooFix.init(context);
+           // RocooFix.init(context);
             // installPach(context);
             //downLoadPatch(context);//模拟下载
             getPatch(context);//需自己配置请求,以及返回参数处理
@@ -58,7 +50,7 @@ public class HotFixManger {
         }
     }
 
-
+*/
     /**
      * 模拟过程
      *
@@ -101,7 +93,7 @@ public class HotFixManger {
         Log.e(TAG, "DownLoadPatch-->");
 
         if (!TextUtils.isEmpty(dexPath)) {
-            RocooFix.applyPatch(context, dexPath);
+            //RocooFix.applyPatch(context, dexPath);
             System.out.println(" installPach" + dexPath);
             Log.e(TAG, " installPach" + dexPath);
 
@@ -137,11 +129,11 @@ public class HotFixManger {
         }
     }
 
-    /**
+  /*  *//**
      * 结合retrofit访问网络, 需自己配置请求,以及返回参数处理
      * 例如返回file和code 如果code!=200,就删除patch;反之,就下载到储存卡根目录.然后installPach即可
      *  此次采用 静态修复,即下次启动生效
-     */
+     *//*
     private static void getPatch(final Context context) {
         Observable<Patch> userObservable = APIService
                 .getPatch(getVersionCode(context) + "");
@@ -177,10 +169,10 @@ public class HotFixManger {
                 });
     }
 
-    /**
+    *//**
      * retrofit 下载,需要自己进行封装 流处理,所以没用
      * @param URL
-     */
+     *//*
     private static void downLoadPatch(String URL){
 
         Observable<File> userObservable = APIService
@@ -261,6 +253,6 @@ public class HotFixManger {
         handler.cancel();
     }
 
-
+*/
 
 }
