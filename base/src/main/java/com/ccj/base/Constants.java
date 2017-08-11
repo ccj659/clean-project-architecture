@@ -7,8 +7,10 @@ package com.ccj.base;
 public class Constants {
 
     public static final String START_LOGIN_WITH_PARAMS = "START_LOGIN_WITH_PARAMS";
-    public static final int REQUEST_START_LOGIN = 0x00010;
+    public static final int REQUEST_START_LOGIN = 0x00110;
     public static final int RESULT_FROM_LOGIN = 0x00011;
+
+
     public static final String PARAMS_RESULT_FROM_LOGIN = "PARAMS_RESULT_FROM_LOGIN";
 
 }

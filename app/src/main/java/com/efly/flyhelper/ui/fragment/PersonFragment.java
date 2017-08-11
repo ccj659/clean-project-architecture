@@ -1,4 +1,4 @@
-package com.efly.flyhelper.fragment;
+package com.efly.flyhelper.ui.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -30,7 +30,6 @@ public class PersonFragment extends BaseFragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
 
     }
 

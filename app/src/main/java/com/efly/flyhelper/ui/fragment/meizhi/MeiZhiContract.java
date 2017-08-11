@@ -1,4 +1,4 @@
-package com.efly.flyhelper.fragment.meizhi;
+package com.efly.flyhelper.ui.fragment.meizhi;
 
 
 import com.ccj.base.base.BasePresenter;

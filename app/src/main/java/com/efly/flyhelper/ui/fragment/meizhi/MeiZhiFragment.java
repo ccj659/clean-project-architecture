@@ -1,4 +1,4 @@
-package com.efly.flyhelper.fragment.meizhi;
+package com.efly.flyhelper.ui.fragment.meizhi;
 
 import android.app.Dialog;
 import android.os.Bundle;

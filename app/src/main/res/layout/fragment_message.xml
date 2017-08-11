@@ -6,38 +6,29 @@
     android:background="@color/window_bg"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/textview"
-        android:layout_gravity="center"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        />
+
 
     <Button
-        android:id="@+id/button_bt_raise_color"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello "
-        android:layout_gravity="center_horizontal" />
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="登录"
         android:id="@+id/button2"
-        android:layout_gravity="center_horizontal" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="带参数 带返回值 登录" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="拍照"
+        android:text="带参数 拍照"
         android:id="@+id/button3"
         android:layout_gravity="center_horizontal" />
-    <Button
+
+    <TextView
+        android:layout_marginTop="50dp"
+        android:id="@+id/tv_show"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="热修复"
-        android:id="@+id/button5"
-        android:layout_gravity="center_horizontal" />
+        android:layout_gravity="center_horizontal"
+        android:text="description" />
 
 
 </LinearLayout>

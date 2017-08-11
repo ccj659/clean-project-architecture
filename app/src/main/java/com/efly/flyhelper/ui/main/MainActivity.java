@@ -1,5 +1,6 @@
 package com.efly.flyhelper.ui.main;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTabHost;
@@ -13,9 +14,9 @@ import android.widget.TextView;
 import com.ccj.base.AppManager;
 import com.ccj.base.base.BaseActivity;
 import com.efly.flyhelper.R;
-import com.efly.flyhelper.fragment.MessageFragment;
-import com.efly.flyhelper.fragment.PersonFragment;
-import com.efly.flyhelper.fragment.meizhi.MeiZhiFragment;
+import com.efly.flyhelper.ui.fragment.HomeFragment;
+import com.efly.flyhelper.ui.fragment.PersonFragment;
+import com.efly.flyhelper.ui.fragment.meizhi.MeiZhiFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -33,7 +34,7 @@ public class MainActivity extends BaseActivity<MainContract.Presenter> implement
     FragmentTabHost mTabHost;
     TabHost.TabSpec tabSpec0;
     private TextView tv_count;
-    private Class fragmentArray[] = {MessageFragment.class, MeiZhiFragment.class, PersonFragment.class};
+    private Class fragmentArray[] = {HomeFragment.class, MeiZhiFragment.class, PersonFragment.class};
     private String tabHostTagArray[] = {"消息演示",  "妹子", "个人中心"};
     private int mImageViewArray[] = {R.drawable.ic_recent, R.drawable.ic_keypad , R.drawable.ic_person};
 
@@ -114,4 +115,9 @@ public class MainActivity extends BaseActivity<MainContract.Presenter> implement
         AppManager.getAppManager().AppExit(this);
     }
 
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+    }
 }
