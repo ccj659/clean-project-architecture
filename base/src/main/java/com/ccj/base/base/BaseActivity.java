@@ -113,8 +113,6 @@ public class BaseActivity<T extends BasePresenter>
                 handleResult(frag, requestCode, resultCode, data);
             }
         }
-
-
         return;
         //}
 

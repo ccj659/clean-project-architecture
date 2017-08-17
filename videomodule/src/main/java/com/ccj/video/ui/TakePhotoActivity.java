@@ -5,14 +5,19 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
+import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.ccj.base.base.BaseActivity;
 import com.ccj.base.base.Constants;
 import com.ccj.base.utils.TLog;
+import com.ccj.base.utils.router.LoginModuleService;
 import com.ccj.base.utils.router.RouterConstants;
+import com.ccj.base.utils.router.RouterUtils;
 import com.ccj.video.R;
 import com.ccj.video.R2;
 
@@ -29,8 +34,10 @@ public class TakePhotoActivity extends BaseActivity<TakePhotoContract.Presenter>
     ImageView imageView;
     @BindView(R2.id.button)
     Button button;
-    public static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
-    private static final int MEDIA_TYPE_IMAGE = 1;
+
+    @Autowired
+    LoginModuleService loginModuleService;
+
 
 
     @Override
@@ -38,35 +45,30 @@ public class TakePhotoActivity extends BaseActivity<TakePhotoContract.Presenter>
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_take_photo);
         ButterKnife.bind(this);
+        RouterUtils.inject(this);
+
         mPresenter = new TakePhotoPresenter(this);
         mPresenter.start();
     }
 
-    @Override
-    public void initView() {
 
-    }
-
-    @Override
-    public void showProgress() {
-        progressDialog.show();
-    }
-//WindowLeaked
-    @Override
-    public void hideProgress() {
-        progressDialog.dismiss();
-    }
-
-    @Override
-    public void showBitmap(Bitmap bitmap) {
-        imageView.setImageBitmap(bitmap);
-    }
 
     @OnClick(R2.id.button)
-    public void onClick() {
-        startTakePhoto();
+    public void onClick(View v) {
+        if (v.getId()==R.id.button){
+            takePhoto();
+        }
+    }
 
 
+
+
+    private void takePhoto() {
+        if (loginModuleService.checkLoginState()){ //模拟模块间通信,调用登录服务:如果登录就开始下一步.
+            startTakePhoto();
+        }else {
+            Toast.makeText(this,"请登录",Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void startTakePhoto() {
@@ -84,10 +86,30 @@ public class TakePhotoActivity extends BaseActivity<TakePhotoContract.Presenter>
                 Log.e("Tlog","data-->"+data.getData().toString());
                 mPresenter.savePhoto(data);
             }
-
         }
 
+    }
 
+
+    @Override
+    public void initView() {
 
     }
+
+    @Override
+    public void showProgress() {
+        progressDialog.show();
+    }
+    //WindowLeaked
+    @Override
+    public void hideProgress() {
+        progressDialog.dismiss();
+    }
+
+    @Override
+    public void showBitmap(Bitmap bitmap) {
+        imageView.setImageBitmap(bitmap);
+    }
+
+
 }

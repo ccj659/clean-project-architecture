@@ -89,6 +89,7 @@ public class LoginActivity extends BaseActivity<LoginContract.Presenter> impleme
             finish();
         } else if (i == R.id.btn_login) {
             //mPresenter.login(tvPhone.getText().toString(), tvPassword.getText().toString());
+
         } else if (i == R.id.btn_register) {
             navigateToRegister();
         }

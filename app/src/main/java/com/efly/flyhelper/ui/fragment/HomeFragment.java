@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.ccj.base.Constants;
+import com.ccj.base.base.BaseApplication;
 import com.ccj.base.base.BaseFragment;
 import com.ccj.base.utils.router.RouterConstants;
 import com.efly.flyhelper.R;
@@ -46,7 +47,6 @@ public class HomeFragment extends BaseFragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
 
     }
 
@@ -88,15 +88,18 @@ public class HomeFragment extends BaseFragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == Constants.REQUEST_START_LOGIN) {
+
             if (data == null) {
                 return;
             }
             String str = data.getStringExtra(Constants.PARAMS_RESULT_FROM_LOGIN);
+
             if (str == null) {
                 return;
             }
 
             tvShow.setText(str);
+            BaseApplication.showToast(str);
         }
     }
 

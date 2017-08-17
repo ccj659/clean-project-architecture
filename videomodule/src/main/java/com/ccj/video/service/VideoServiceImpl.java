@@ -1,4 +1,4 @@
-package com.ccj.video;
+package com.ccj.video.service;
 
 import android.content.Context;
 import android.util.Log;

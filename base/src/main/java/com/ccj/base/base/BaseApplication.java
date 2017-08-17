@@ -26,7 +26,6 @@ public class BaseApplication extends Application {
     private static Context context;
     private static Resources resource;
     private static BaseApplication baseApplication;
-    private String dexPath;
 
     public static synchronized BaseApplication getInstance() {
         return baseApplication;
@@ -41,14 +40,18 @@ public class BaseApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        initARouter();
         context = getBaseContext();
         baseApplication = this;
-        //检测内存泄露
-        //LeakCanary.install(this);
-
         SharedPreferenceUtil.initSharedPreference(getApplicationContext());
+    }
 
-
+    /**
+     * ARouter 在每个模式下都需要,此时,
+     * 由于每个module的application只有在module模式下才启用,所以可以这样设置-->
+     * 可以将各module都继承BaseApplication
+     */
+    private void initARouter() {
         if (BuildConfig.DEBUG) {
             // 这两行必须写在init之前，否则这些配置在init过程中将无效
             ARouter.openLog();     // 打印日志
@@ -57,23 +60,6 @@ public class BaseApplication extends Application {
         }
         ARouter.init(this); // 尽可能早，推荐在Application中初始化
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     /**
