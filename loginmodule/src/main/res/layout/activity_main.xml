@@ -8,16 +8,9 @@
     <TextView
         android:id="@+id/tv_login_main"
         android:layout_width="wrap_content" android:layout_height="wrap_content"
-        android:text="Hello World!" app:layout_constraintBottom_toBottomOf="parent"
+        android:text="login module Hello World!" app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent" app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/btn_event"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="EventBus 传递信息"
-        tools:layout_editor_absoluteX="128dp"
-        tools:layout_editor_absoluteY="364dp" />
 
 </android.support.constraint.ConstraintLayout>
