@@ -17,4 +17,5 @@
 
 
 
-![zujianhua_gif_main.gif](http://upload-images.jianshu.io/upload_images/1848340-92326764d1e73f39.gif?imageMogr2/auto-orient/strip)
+参考界面:
+![](http://i.imgur.com/EnBxczU.gif)
