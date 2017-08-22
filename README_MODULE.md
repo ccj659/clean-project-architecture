@@ -40,9 +40,8 @@
 
 
 ## SHOW
+![](http://upload-images.jianshu.io/upload_images/1848340-dc1f5ec9d6fcfb07.gif?imageMogr2/auto-orient/strip)
 
-
-![zujianhua.gif](http://upload-images.jianshu.io/upload_images/1848340-dc1f5ec9d6fcfb07.gif?imageMogr2/auto-orient/strip)
 
 
 ## 模块化 会遇到如下问题
