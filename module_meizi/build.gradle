@@ -1,0 +1,74 @@
+
+if (isModule.toBoolean()) {
+    apply plugin: 'com.android.application'
+} else {
+    apply plugin: 'com.android.library'
+}
+//butterknife
+apply plugin: 'com.jakewharton.butterknife'
+
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
+
+    defaultConfig {
+
+        if (isModule.toBoolean()) {
+            applicationId "com.ccj.meizi"
+        }
+
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode rootProject.ext.versionCode
+        versionName rootProject.ext.versionName
+
+
+        // resourcePrefix "user_"
+
+
+        //arouter
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [moduleName: project.getName()]
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    sourceSets {
+        main {
+            if (isModule.toBoolean()) {
+                manifest.srcFile 'src/main/AndroidManifest.xml'
+            } else {
+                manifest.srcFile 'src/main/release/AndroidManifest.xml'
+                java {
+                    exclude 'debug/**'
+                }
+            }
+        }
+    }
+
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+
+
+    //butterknife
+    annotationProcessor rootProject.ext.butterknifeCompiler
+
+    //arouter
+    compile rootProject.ext.arouterApi
+    annotationProcessor rootProject.ext.arouterCompiler
+
+    compile project(':base')
+
+}
+
+
+
