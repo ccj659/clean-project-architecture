@@ -1,7 +1,8 @@
 <resources>
-    <string name="app_name">clean-project-architecture</string>
-
-
+    <string name="app_name">MVP和组件化</string>
+    <string name="title_notifications">我的</string>
+    <string name="title_dashboard">妹子</string>
+    <string name="title_home">首页</string>
 
 
 </resources>

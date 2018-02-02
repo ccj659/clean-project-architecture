@@ -6,7 +6,11 @@ package com.ccj.base.bean;
 public class UserDetail {
 
 
+
     public String Users_PersonName;
+
+
+
     public String Users_CellPhoneNum;
 
 }

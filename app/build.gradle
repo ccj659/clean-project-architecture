@@ -56,6 +56,7 @@ dependencies {
 
 
     //arouter
+    compile rootProject.ext.arouterApi
     annotationProcessor rootProject.ext.arouterCompiler
 
     //butterknife
@@ -65,8 +66,11 @@ dependencies {
         //当isDebug true，app得依赖基础库，保证app不报错
         compile project(':base')
     } else {
-        compile project(':loginmodule')
-        compile project(':videomodule')
+        compile project(':module_home')
+        compile project(':module_user')
+        compile project(':module_video')
+        compile project(':module_meizi')
+
     }
 
 }

@@ -18,6 +18,8 @@ public class AppManager {
     private AppManager() {
     }
 
+
+
     /**
      * 单一实例
      */

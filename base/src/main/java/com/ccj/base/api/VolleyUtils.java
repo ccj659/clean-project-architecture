@@ -13,7 +13,7 @@ import com.ccj.base.utils.LruBitmapCache;
 
 /**
  * volley留做备用
- * Created by ccj on 2015/12/4.
+ * Created by ccj on 2016/12/4.
  */
 public class VolleyUtils {
 

@@ -10,8 +10,10 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/base" />
-            <option value="$PROJECT_DIR$/loginmodule" />
-            <option value="$PROJECT_DIR$/videomodule" />
+            <option value="$PROJECT_DIR$/module_home" />
+            <option value="$PROJECT_DIR$/module_meizi" />
+            <option value="$PROJECT_DIR$/module_user" />
+            <option value="$PROJECT_DIR$/module_video" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

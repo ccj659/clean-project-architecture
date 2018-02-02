@@ -71,6 +71,7 @@ public class User extends BaseBean implements Serializable {
         public String Users_CorpKindName;
         public String Users_AreaName;
         public Object Users_Photo;
+
         public Object Users_OrderBy;
 
         @Override

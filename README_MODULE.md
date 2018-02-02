@@ -1,11 +1,12 @@
-# Android 组件化
+# 客户端组件化探究
 
-项目地址[https://github.com/ccj659/clean-project-architecture](https://github.com/ccj659/clean-project-architecture) 
+**项目地址** [https://github.com/ccj659/clean-project-architecture](https://github.com/ccj659/clean-project-architecture)
 
 
-## 前言
 
-随着业务的增多,迭代版本的增加, 
+## 1.组件化的产生背景
+
+随着业务的增多,迭代版本的增加,
 
 模块化开发, 业务解耦, 业务独立进行测试,编译,运行,想想都惊喜~
 
@@ -14,58 +15,122 @@
 为了你的"代码洁癖",还有项目的未来, 组件化, 势在必行.....
 
 
+## 2.普通开发模式的弊端
+1、实际业务变化非常快，但是单一工程的业务模块耦合度太高，牵一发而动全身,每次改一个地方都很小心.
 
+2、对工程所做的任何修改都必须要编译整个工程；
 
-## Android 业务组件化
+3、团队协同开发存在较多的冲突.不得不花费更多的时间去沟通和协调，并且在开发过程中，任何一位成员没办法专注于自己的功能点，影响开发效率；
 
-项目地址[https://github.com/ccj659/clean-project-architecture](https://github.com/ccj659/clean-project-architecture) 
-
-类似于UML类图中聚合的概念,如下图所示,
-
-![image.png](http://upload-images.jianshu.io/upload_images/1848340-0df202dfbe34f43f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-
-组件可以自己行动,也可以组成一个整体运行.
-关于基础组件,可以同时放在一个base包下, 也可以将base分不同的包,比如 数据库lib, 资源lib,等等...这些其实可以自己定义.
-### 优点
-便于开发，团队成员只关注自己的开发的小模块，降低耦合性，后期维护方便等。各自可以按照自己的代码风格开发，最后组装，成一个 app。
-
-每个模块都可以打包成一个带版本号的@aar,对业务进行版本控制,降低了修改某一个业务造成其他业务受影响的风险.
-
-与插件化的风险比较,组件化是几乎没有风险的,当下就可以做的一种架构. 
-
-
-### 不足
-
-在模块间 数据交换,相互依赖,可能存在难题,路由器模块还不太成熟,问题各不相同,需要各自解决.
-
-
-## SHOW
-![](http://upload-images.jianshu.io/upload_images/1848340-dc1f5ec9d6fcfb07.gif?imageMogr2/auto-orient/strip)
+4、不能灵活的对业务模块进行配置和组装；
 
 
 
-## 模块化 会遇到如下问题
-
-1.libarary和applicaiton 之间的转换
-
-2.路由器,如何在拿不到类名的情况下,启动,模块间相互吊起服务. 最近路由器很多~
-目前的路由有[阿里巴巴的](https://github.com/alibaba/ARouter),
-还有[mzule的ActivityRouter](https://github.com/mzule/ActivityRouter).
-
-3.代码解耦,作为线程间交互桥梁. 我用的是eventBus,作为事件总线,代替handler,
-
-4.在集合app的最后,将每个模块打包成aar,减少编译时间. 
-5. 每个业务module有自己的版本号,分别release 到代码控制器中, 供主app使用.
+## 3.什么是组件化
 
 
-## 组件化的构建步骤
-请参照[https://github.com/ccj659/clean-project-architecture](https://github.com/ccj659/clean-project-architecture) 项目
+	组件化是 编程思想"高内聚,低耦合"的一种体现, 是 业务独立化, 粒度最小化,可移植的功能模块.
 
 
-![image.png](http://upload-images.jianshu.io/upload_images/1848340-7b563b6a628c82ae.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
-### 1. 模块开发模式切换
-1. 在`gradle.properties` 增加一个变量
+1.页面上的每个 独立的 可视/可交互区域视为一个组件;
+2.每个组件对应一个工程目录，组件所需的各种资源都在这个目录下就近维护;
+3.每个组件相对独立，页面只不过是组件的容器，组件自由组合形成功能完整的界面;
+4.当不需要某个组件，或者想要替换组件时，可以整个目录删除/替换。
+
+
+
+
+
+
+
+## 4.组件化会解决 目前项目中哪些问题?
+
+1.急需解决 项目编译时间过长问题!
+
+2.急需团队开发,解决提交代码 牵一发动全身的问题!
+
+3.解决开发效率低下问题.
+
+4.解决项目越来越臃肿,分层不明确,,难以维护问题.
+
+5.减少 学习成本.
+
+
+
+
+## 5.项目如何进行组件化?
+
+
+
+
+
+**在框架中的 项目组件化是这样的~**
+
+![未命名文件 (6).png](http://upload-images.jianshu.io/upload_images/1848340-4011e008d6533cc2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+
+**反映在代码目录结构上,就是如下所示~**
+
+![image.png](http://upload-images.jianshu.io/upload_images/1848340-1681c9f78b3f90c9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+
+**根据上述结构图,我对目前的项目做了如下调整.**
+
+1.将项目的业务模块(主页,好价,好文,好物,个人中心,关注),作为独立的application module. 每一位业务的开发人员,只需要管理自己的module即可,避免直接或者间接修改他人代码导致的问题.而且,开发期间,自住选择必要中间件的依赖,自住开发风格(MVP,MVC,etc).
+
+2.将中间组件(通用list_item组件,分享组件,推送组件,内置浏览器组件,通用view组件,以及通用跳转等等),作为library module进行选择性依赖.
+
+3.将底层库(网络请求库,db库,File库,图片库等等),作为一个底层library库,独立进行版本控制,用@aar-v1.0.1 来引用,这样可以防止,他人的随意改动,提高版本切换之间的稳定性.
+
+
+## 6.问题五连
+
+
+#### Q1.如何将工程拆分成有机的整体,组件单独运行？
+
+利用Android studio 自带的gradle 来管理. 我们可以使用grovxy脚本,来对 是否是组件状态进行切换.
+
+![image.png](http://upload-images.jianshu.io/upload_images/1848340-46ab2ef7c01244f3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+
+####  Q2.如何分别执行独立运行,合并运行的代码?
+当项目是APPlication时候,需要有category为LAUNCHER的入口activity.
+当项目是lib的时候,不能存在入口activity.所以要分别建立两套配置.
+
+还要注意,如果想要保持主题样式通用, 主app下,’theme’'ico','label'等等,在module中都不能存在.
+
+![image.png](http://upload-images.jianshu.io/upload_images/1848340-a531f85dd9d77563.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+####  Q3.代码都分离了,如何进行带参跳转,相互调用?
+首先,考虑到解耦, 可以把ARouter的所有跳转都进行封装.以后待项目成熟,我会用自己的Router.
+	另外,module内,可以用传统方式传递和用路由器传递都行.
+![image.png](http://upload-images.jianshu.io/upload_images/1848340-8bf31d3c74218ad9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+
+
+####  Q4.是啊,分业务是好,但是代码合并后,如果避免存在资源名冲突?
+
+1.第三方依赖的问题,依赖尽量放在base中.这样,gradle会自动去重.
+
+
+2.资源名重复,在编码的时候 添加resourcePrefix "video"+"_",强制人员添加前缀(但是对drawable不支持,需用户自己增加前缀).
+
+3.将资源统一放在一个module(比如Base中),但是编译会增加时间.(不太复合资源解耦 原则)
+
+####  Q5.代码那么多,把之前的都解耦了,如何避免后期继续耦合?
+
+针对这个问题, 组件之间必须针对接口编程,杜绝面向实现编程.
+另外, 我们在设计一个组件的时候, 要尽量用继承封装多态去解决问题.
+
+
+
+
+##7.如何实现
+
+
+
+**1.在`gradle.properties` 增加一个变量**
 
 ```
 # true代表模块开发,false代表合并到主app.
@@ -74,7 +139,7 @@ isModule=false
 
 ```
 
-2. 在每个业务module的`build.gradle`里面添加
+**2.在每个业务module的`build.gradle`里面添加**
 
 ```
 //根据isModule值进行切换 是否为lib或者app
@@ -85,7 +150,7 @@ if (isModule.toBoolean()) {
 }
 ```
 
-3. 建立两个`AndroidManifest.xml`,进行切换
+**3.建立两个`AndroidManifest.xml`,进行切换**
 
 大家都知道,当项目是APPlication时候,需要有category为`LAUNCHER`的入口activity.
 而当项目是lib的时候,不能存在入口activity.所以要分别建立两套`AndroidManifest.xml `,还要注意,如果想要保持主题样式通用, 主app项目下的`theme`,'ico','label'等等,在module中都不能存在.
@@ -93,7 +158,8 @@ if (isModule.toBoolean()) {
 ![image.png](http://upload-images.jianshu.io/upload_images/1848340-92b4a7213a9ad8d1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 
-4. 建立两个`AndroidManifest.xml`,进行切换
+**4.建立两个`AndroidManifest.xml`,进行切换**
+
 ```
     sourceSets {
         main {
@@ -110,256 +176,71 @@ if (isModule.toBoolean()) {
     }
 ```
 
-5. 业务组件不需要混淆代码.
+**5.业务组件不需要混淆代码.**
 一旦业务组件的代码被混淆，而这时候代码中又出现了bug，将很难根据日志找出导致bug的原因；
 
 
-6. 当ismodule开关为true时,每个module可独立运行.
+**6.当ismodule开关为true时,每个module可独立运行.**
 
 ![image.png](http://upload-images.jianshu.io/upload_images/1848340-ddb00f60544243a3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
-## 2. 数据路由
 
-首先,考虑到解耦, 可以把ARouter的所有跳转都进行封装.以防以后更换路由器. 
 
-这里,module内,可以用传统方式传递和用路由器传递都行.
+## 应用效果
 
 
-## 3. 资源重复
-1. module1和module2都依赖base,则gradle在编译期间,会自动去重,我们不需要管.
-2. 资源名重复,解决1:在编码的时候 添加`resourcePrefix  "video"+"_"`,强制人员添加前缀(但是对drawable不支持,需用户自己增加前缀).
-3.  解决2:将资源统一放在一个module(比如Base中),但是编译会增加时间.(不太复合资源解耦 原则)
+![compone1.gif](http://upload-images.jianshu.io/upload_images/1848340-a3af30d73a24fdaa.gif?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
-4. 如果是用provide代替complile
 
 
 
-## 4. 代码隔离-(面向接口编程)
+![compone2.gif](http://upload-images.jianshu.io/upload_images/1848340-06e31929d2927460.gif?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
-###  基础库`Base`
 
-1. 网络库 我们项目用的volley(10年开始的项目迭代至今),
-2. 资源库 基础mipmap,drawable资源等等
-3. BaseClass BaseActivity,BaseBean,BaseAdapter等等.
-4. weight组件 共同的自定义view,或者第三方view.
-		....
-		
 
-### 组件`Module`
-####  组件间通信 `IProvider`
-请参考[ARouter的文档的](https://github.com/alibaba/ARouter)`通过依赖注入解耦:服务管理(一) 暴露服务
-` 进行~
 
+#总结
 
-举个例子, 在我的项目中[clean-project-architecture](https://github.com/ccj659/clean-project-architecture)中,`videoModule的拍照功能`需要调用`loginmodule的登录功能`,按照上述例子,就可以实现.
 
+## 优点
 
+1.业务module独立,降低业务的学习成本.
 
-```
-// 声明接口,其他组件通过接口来调用服务
-/**
- * 示例:子模块间调用方法
- * Created by chenchangjun on 17/8/14.
- */
+2.模块解耦, 代码架构更加清晰，降低项目的维护难度.
 
-public interface LoginModuleService extends IProvider {
+3.随着项目的代码增加,单独编译,单独运行,明显减少代码编译时间.
 
+4.适合于团队开发.
 
-     boolean checkLoginState();
 
-}
+## 不足
 
 
-// 实现接口
-/**
- *     * 实现接口,
- * Created by chenchangjun on 17/8/14.
- */
-@Route(path = RouterConstants. LOGIN_SERVICE_IMPL)
-public class CheckLoginService implements LoginModuleService{
+1.switch中 case必须是 静态常亮,所以在引用  library中 的 资源(R.id.button) 时, 需要改为if else. 这个还需要找到解决方案...
 
-    /**
-     * 实例化服务,面向接口编程
-     * @return
-     */
-    @Override
-    public boolean checkLoginState() {
-        //可自行在loginModule
-        return false;
-    }
 
-    @Override
-    public void init(Context context) {
+2.模块间 数据交互,比较繁琐
 
-    }
-}
+3.路由器模块还不太成熟
 
+4.实际开展过程,抽丝剥茧,过程会很痛苦.
 
-//另外一个module调用,(由接口进行隔离)
-    private void takePhoto() {
-        if (loginModuleService.checkLoginState()){ //模拟模块间通信,调用登录服务:如果登录就开始下一步.
-            startTakePhoto();
-        }else {
-            Toast.makeText(this,"请登录",Toast.LENGTH_SHORT).show();
-        }
-    }
+5.还存在潜在问题.
 
+## 后期计划
 
-```
+ 1.提高编译速度, 将 依赖 由 整个项目进行编译, 变为依赖 aar包, 减少编译时间.
 
+ 2.搭建一个私有的maven仓库，将我们开发好的组件上传到这个私有的maven仓库上，然后内部开发人员就可以像引用三方库那样轻而易举的将组件引入到项目中
 
+3. 完善复合项目的事件路由Router,
 
 
-### 宿主`App`
-每个module都有`Application`	,这里,为了方便, 将共同的东西抽取出来,放在了`basemodule`的BaseApplicaiotn中.
-当遇到每个module可能都要有自己初始化的方法,我们可以在每个module 附带一个application.
-		
-		
 
+## 参考
 
+ [aar的使用](http://blog.csdn.net/zxw136511485/article/details/52777286)
 
+ [http://blog.csdn.net/guiying712/article/details/55213884](http://blog.csdn.net/guiying712/article/details/55213884)
 
-
-# 遇到问题
-
-###  1.Butterknife 的bindview()方法,library的不能存在,原因是在app和library切换的时候,注解上的变量必须是`static final`, library不能存在`switch()`.
-[Butterknigher  libarary不能用,这篇文章不错](http://www.jianshu.com/p/82da8c26cc60)
-
-**问题:**
-![image.png](http://upload-images.jianshu.io/upload_images/1848340-cfa528693d699a0e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-
-**解决**
-
-1. 上述问题可以,将R改为R2如上图第二个变量所示.重新clean,即可.
-
-2. butterknife的onclick事件,用下面的方式处理即可.
-
-3. 注解问题,就像用dragger.xutils等等,能不能这种方式处理,还有待测试.
-
-
-```
-//package com.ccj.login.ui.login;
-
-  /** 
-     * click方法中同样使用R2，但是找id的时候使用R，
-     * ibrary中是不能使用 switch- case 找id的，原因：http://www.jianshu.com/p/89687f618837
-     */
-    @OnClick({R2.id.iv_cancel, R2.id.btn_login, R2.id.btn_register})
-    public void onClick(View view) {
-        int i = view.getId();
-        if (i == R.id.iv_cancel) {
-            finish();
-        } else if (i == R.id.btn_login) {
-            //mPresenter.login(tvPhone.getText().toString(), tvPassword.getText().toString());
-            Toast.makeText(this,"登录测试",Toast.LENGTH_SHORT).show();
-        } else if (i == R.id.btn_register) {
-            navigateToRegister();
-        }
-    }
-
-```
-
-
-
-### 2.目前,路由器ARouter 没有解决`onActivityResult`的fragment分发问题.
-**问题**:
-
-当你再fragment上 进行路由
-
-```
-  ARouter.getInstance().
-                build(RouterConstants.VIDEO_MUDULE_ACTIVITY).
-                withString(Constants.START_LOGIN_WITH_PARAMS, "I am params from MainActivity").
-                navigation();
-
-```
-在fragment中的`onActivityResult`是接收不到数据的,ARouter会在activity中调用该方法.
-
-
-**解决**
-
-在BaseActivity中重写`onActivityResult `方法.让子类继承即可.
-
-```
- /**
-     * 解决fragment onActivityResult不调用
-     *
-     * @param requestCode
-     * @param resultCode
-     * @param data
-     */
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        FragmentManager fm = getSupportFragmentManager();
-        //if (index != 0) {
-        if (fm.getFragments() == null) {
-            Log.w(TAG, "Activity result fragment fragmentIndex out of range: 0x"
-                    + Integer.toHexString(requestCode));
-            return;
-        }
-        for (int i = 0; i <fm.getFragments().size() ; i++) {
-            Fragment frag = fm.getFragments().get(i);
-            if (frag == null) {
-                Log.w(TAG, "Activity result no fragment exists for fragmentIndex: 0x"
-                        + Integer.toHexString(requestCode));
-            } else {
-                handleResult(frag, requestCode, resultCode, data);
-            }
-        }
-        return;
-        //}
-
-    }
-
-    /**
-     * 递归调用，对所有子Fragement生效
-     *
-     * @param frag
-     * @param requestCode
-     * @param resultCode
-     * @param data
-     */
-    private void handleResult(Fragment frag, int requestCode, int resultCode,
-                              Intent data) {
-        frag.onActivityResult(requestCode, resultCode, data);
-        List<Fragment> frags = frag.getChildFragmentManager().getFragments();
-        if (frags != null) {
-            for (Fragment f : frags) {
-                if (f != null)
-                    handleResult(f, requestCode, resultCode, data);
-            }
-        }
-    }
-    
-```
-
-###3 各种编译处理插件,可能会出现问题
-因为Arouter是编译期间 执行,所以当你的项目集成`dragger2,butterknife,xutils,databinding`可能会出现问题.需要各自排查
-
-
-
-## 总结
-组件化是用gradle作为组间切换工具,用Arouter作为跳转路由器 的一种 框架.
-
-在开发中, 组件化,有利于模块业务解耦,让每人负责的业务相互独立.
-在后续开发中,我们可以将不同的组件模块lib分别独立,需要的时候分别进行依赖即可.
-
-相关代码实现请查看项目
-[https://github.com/ccj659/clean-project-architecture](https://github.com/ccj659/clean-project-architecture) 
-
-
-
-
-## 参考:
-
-
-
- [ARouter 类似于Spring的控制反转IOC.路由分发](https://github.com/alibaba/ARouter)
-
-
-[创建 Android 库](https://developer.android.com/studio/projects/android-library.html?hl=zh-cn#CreateLibrary)
-
-
-[http://blog.csdn.net/guiying712/article/details/55213884](http://blog.csdn.net/guiying712/article/details/55213884)
-
-[吴小龙 Android 组件化探索与思考](http://wuxiaolong.me/2017/08/01/ModularExploree/)
+ [Android彻底组件化demo发布](https://www.jianshu.com/p/59822a7b2fad)

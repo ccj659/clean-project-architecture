@@ -38,5 +38,6 @@
 
 
     <color name="tool_bar_white">@android:color/white</color>
+    <color name="colordc">#dcdcdc</color>
 
 </resources>

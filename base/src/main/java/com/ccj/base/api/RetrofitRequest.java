@@ -15,42 +15,4 @@ public interface RetrofitRequest {
 
     String BASE_URL = isTest?BASE_URL_TEST:BASE_URL_OFFICAL;//发布服务器
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-    */
-/**
-     * 下载补丁
-     * @return
-     *//*
-
-    @GET
-    @Streaming
-    Observable<File> downPatch(@Url String url);
-*/
-  /*  *//**
-     * 请求补丁(json post)
-     * 根据versioncode请求
-     * post:{"VersionCode":"3"}
-     * @param body
-     * @return
-     *//*
-    @Headers( "Content-Type: application/json" )
-    @POST(BASE_URL+"Version/GetJar.ashx/")
-    Observable<Patch> getPatch(@Body HashMap<String, String> body);
-
-*/
-
 }

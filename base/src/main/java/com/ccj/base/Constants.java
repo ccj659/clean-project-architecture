@@ -12,5 +12,6 @@ public class Constants {
 
 
     public static final String PARAMS_RESULT_FROM_LOGIN = "PARAMS_RESULT_FROM_LOGIN";
+    public static final String PARAMS_REQUEST_FOR_DETAIL = "PARAMS_REQUEST_FOR_DETAIL";
 
 }

@@ -13,7 +13,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class APIService {
 
     private static final String TAG = "APIService";
-    public static final String URL_HOST = "http://123.234.82.23";//服务器端口
 
     //get请求
     public static final String URL_GANK_IO = "http://gank.io";//gank.io 中的妹子API
@@ -24,7 +23,7 @@ public class APIService {
      * 初始化 retroft
      */
     protected static final Retrofit sRetrofit = new Retrofit.Builder()
-            .baseUrl(URL_GANK_IO == null ? URL_HOST : URL_GANK_IO)
+            .baseUrl( URL_GANK_IO )
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(RxJavaCallAdapterFactory.create()) // 使用RxJava作为回调适配器
             .build();
